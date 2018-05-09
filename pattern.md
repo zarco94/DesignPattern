@@ -149,7 +149,52 @@ Può però trattare un insieme di oggetti eterogeneo in maniera **atomica** (o t
 
 ...da completare...
 
+---
 
+# Decorator
+
+[FONTE](https://sourcemaking.com/design_patterns/decorator)
+
+## Intento
+
+
+
+## Discussione
+
+
+
+
+
+
+## Struttura
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/decorator.png)
+
+ 
+
+## Come implementarlo
+
+1. 
+
+2. 
+
+3. 
+
+4.  
+
+5. 
+
+6.  
+
+7. 
+
+## Differenze con altri pattern
+
+## Considerazioni
+
+
+
+---
 
 
 
