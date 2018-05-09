@@ -5,7 +5,19 @@ title: Design Pattern
 ---
 ---------------------------------------------
 
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Lobster|Muli');
+    .titoliPattern {
+        font-family:Lobster;
+        color:#f72c44;
+        font-size:500%;
+        text-align: center;
+    }
+</style>
+
 ![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/freccie.jpeg)
+
+<h1 class="titoliPattern">Pattern Strutturali</h1>
 
 # Adapter
 
@@ -66,6 +78,17 @@ La gestione di una Directory e di una Entità sarà sicuramente diversa, ma con 
 
 ## Discussione
 
+Creo una *classe astratta* **Component** che specifica il comportamento che voglio implementare (sia che l'oggetto sia singolo o un gruppo di oggetti). Le classi che rappresentano l'oggetto singolo(**Leaf**) e il gruppo(**Composite**) saranno *figli* della classe Component.
+
+L'oggetto Composite può poi associare un altro oggetto Component. 
+
+Il pattern va quindi usato ogni volta che:
+
+> Ho un Composite che contienen un Component che può essere a sua volta un component.
+
+Quando ho bisgno di una struttura come quella delle cartelle sul PC
+
+
 
 
 ## Struttura
@@ -76,7 +99,9 @@ La gestione di una Directory e di una Entità sarà sicuramente diversa, ma con 
 
 ## Come implementarlo
 
-
+1. Assicurarsi che si vuole rappresentare una intera relazione gerarchica.
+2. Considerando il "Contenitori che contengono contenuti i quali a loro volta possono essere contenitori" e dividere i contenuti dai contenitori. 
+3. Creare l'interfaccia che rende intercambiabile i contenuti con i contenitori. 
 
 ## Differenze con altri pattern
 
