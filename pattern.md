@@ -9,6 +9,8 @@ title: Design Pattern
 
 # Adapter
 
+[FONTE](https://sourcemaking.com/design_patterns/adapter)
+
 ## Intento
 
 Permette a due classi di lavorare insieme nonostante abbiano delle interfacce incompatibili. Converte l'interfaccia di una classe in un interfaccia utile al cliente.
@@ -47,14 +49,20 @@ L'adapter avvolge una classe presistente e mi restituisce una traduzione di ques
 * L'Adapter cambia l'interfaccia di un oggetto esistente, mentre il **Decorator** amplia un dato oggetto senza modificarne l'interfaccia. Per questo motivo l'Adapter è più trasparente all'utente che non l'Adapter e per questo il Decorator permette la composizione ricorsiva e l'Adapter no. 
 * **Facade** definisce una nuova interfaccia, mentre l'Adapter riusa una vecchia interfaccia. L'adapter fa in modo che due interfaccie esistenti lavorino insieme piuttosto che crearne una tutta nuova. 
 
-[FONTE](https://sourcemaking.com/design_patterns/adapter)
 
 ---
 
 # Composite
 
+[FONTE](https://sourcemaking.com/design_patterns/composite)
+
 ## Intento
 
+Serve per comporre oggetti dentro a delle strutture ad albero. Permette così di trattare insiemi di oggetti dello stesso tipo come se fossero un oggetto singolo. 
+
+Puo essere ricorsivo e quindi una Directory contiene Entità ma ogni Entità può essere una Directory. 
+
+La gestione di una Directory e di una Entità sarà sicuramente diversa, ma con il composite rendiamo questa differenza trasparente al Client che potrà trattare il gruppo come il singolo. 
 
 ## Discussione
 
@@ -72,7 +80,7 @@ L'adapter avvolge una classe presistente e mi restituisce una traduzione di ques
 
 ## Differenze con altri pattern
 
-[FONTE](https://sourcemaking.com/design_patterns/composite)
+
 
 
 
