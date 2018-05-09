@@ -101,7 +101,11 @@ Quando ho bisgno di una struttura come quella delle cartelle sul PC
 
 1. Assicurarsi che si vuole rappresentare una intera relazione gerarchica.
 2. Considerando il "Contenitori che contengono contenuti i quali a loro volta possono essere contenitori" e dividere i contenuti dai contenitori. 
-3. Creare l'interfaccia che rende intercambiabile i contenuti con i contenitori. 
+3. Creare l'interfaccia che rende intercambiabile i contenuti con i contenitori. Che specifichi il comportamento che deve essere esercitato in modo uguale su Container o Continee
+4.  **Container** e **Continee** sono in una relazione *is a* con l'interfaccia
+5. I **Container**  sono in una relazione *has a* 1aMOLTI con l'interfaccia
+6.  Le classi di contenitori sfruttano il polimorfismo per delegare ai propri oggetti contenitori.
+7. I metodi `addChild()` e `removeChild()` avrebbe più senso averli nella classe Composite ma dato che vogliamo trattare uniformamente Leaf e Composite  vengono invece inseriti nella classe Component. Sacrificando la *trasparenza* per la *sicurezza*
 
 ## Differenze con altri pattern
 
