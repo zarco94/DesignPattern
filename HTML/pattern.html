@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>Design Pattern</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Design Pattern</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">8 maggio 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#adapter">Adapter</a><ul>
+<li><a href="#intento">Intento</a></li>
+<li><a href="#discussione">Discussione</a></li>
+<li><a href="#struttura">Struttura</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr />
+<p><img src="/Users/gabriele/Università/2%20anno/2%20semestre/ingegneria%20Software/APPUNTI%20ing.%20software/res/freccie.jpeg" /></p>
+<h1 id="adapter">Adapter</h1>
+<h2 id="intento">Intento</h2>
+<p>Permette a due classi di lavorare insieme nonostante abbiano delle interfacce incompatibili. Converte l’interfaccia di una classe in un interfaccia utile al cliente.</p>
+<p>Avvolge una classe esistenza ad una nuova interfaccia.</p>
+<p>Se voglio utilizzare un componente non sviluppato da me questo avrà una certa interfaccia per interfacciarsi con l’esterno. Io probabilmente ho bisogno di un altro tipo di interfaccia per collegarlo al mio sistema.</p>
+<h2 id="discussione">Discussione</h2>
+<p>L’adapter crea una <em>astrazione intermedia</em> che traduce la classe da utilizzare in maniera comprensibile al nuovo sistema.</p>
+<p>Il cliente <strong>richiama i metodi dell’oggetto Adapter</strong> e la chaimata viene reindirizzata all’Adaptee. <em>Può essere creata sia con <strong>AGGREGAZIONE</strong> che con <strong>EREDITARIETA’</strong></em></p>
+<p>L’adapter avvolge una classe presistente e mi restituisce una traduzione di quest’ultima.</p>
+<h2 id="struttura">Struttura</h2>
+<p><img src="/Users/gabriele/Università/2%20anno/2%20semestre/ingegneria%20Software/APPUNTI%20ing.%20software/res/adapter.png" /></p>
+<ul>
+<li>Il client interagisce solo con l’interfaccia Target la quale implementa dei metodi che il client riconosce</li>
+<li>L’interfaccia poi viene implementata dalla classe Adapter che traduce</li>
+</ul>
+<hr />
+</body>
+</html>
