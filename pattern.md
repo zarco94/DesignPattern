@@ -165,10 +165,7 @@ Voglio quindi aggiungere un comportamento o uno stato in *run-time*. Però per f
 
 ## Discussione
 
-
-
-
-
+Se lo facessimo con un gerarchia di *ereditarietà* non diamo all'utente la possibilità di scegliere lui la combinazione di abbellimenti da mettere alla classe ma sarebbe forzato ad usare solamente uno dei figli. Se volessimo permettere tutte le combinazioni avremmo il numero di classi che crescerebbe esponenzioalmente. La struttura definità dal pattern è dunque essenziale. 
 
 ## Struttura
 
