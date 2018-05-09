@@ -5,7 +5,7 @@ title: Design Pattern
 ---
 ---------------------------------------------
 
-![](/Users/gabriele/Università/2 anno/2 semestre/ingegneria Software/APPUNTI ing. software/res/freccie.jpeg)
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/freccie.jpeg)
 
 # Adapter
 
@@ -27,7 +27,7 @@ L'adapter avvolge una classe presistente e mi restituisce una traduzione di ques
 
 ## Struttura
 
-![](/Users/gabriele/Università/2 anno/2 semestre/ingegneria Software/APPUNTI ing. software/res/adapter.png)
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/adapter.png)
 
 * Il client interagisce solo con l'interfaccia Target la quale implementa dei metodi che il client riconosce
 * L'interfaccia poi viene implementata dalla classe Adapter che iplementa i metodi dell'interfaccia in modo che chiamino i metodi dell'Adaptee nella maniera corretta. 
@@ -50,6 +50,29 @@ L'adapter avvolge una classe presistente e mi restituisce una traduzione di ques
 [FONTE](https://sourcemaking.com/design_patterns/adapter)
 
 ---
+
+# Composite
+
+## Intento
+
+
+## Discussione
+
+
+
+## Struttura
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/composite.png)
+
+ 
+
+## Come implementarlo
+
+
+
+## Differenze con altri pattern
+
+[FONTE](https://sourcemaking.com/design_patterns/composite)
 
 
 
