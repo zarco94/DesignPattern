@@ -49,16 +49,23 @@ L'adapter avvolge una classe presistente e mi restituisce una traduzione di ques
 ## Come implementarlo
 
 1. **Identifica i soggetti**: identificare qual'è il Client e chi è l'Adaptee.
+
 2. **Identifica l'interfaccia**: capire qual'è l'interfaccia di cui ha bisogno il Client.
+
 3. **Creare la classe Adapter** che implementa l'interfaccia e i suoi metodi chiamando i metodi dell'Adaptee
+
 4. Per farlo la classe Adapter deve avere il metodo della classe Adaptee
 
 ## Differenze con altri pattern
 
 * con Bridge..
+
 * con Bridge..
+
 * con Proxy
+
 * L'Adapter cambia l'interfaccia di un oggetto esistente, mentre il **Decorator** amplia un dato oggetto senza modificarne l'interfaccia. Per questo motivo l'Adapter è più trasparente all'utente che non l'Adapter e per questo il Decorator permette la composizione ricorsiva e l'Adapter no. 
+
 * **Facade** definisce una nuova interfaccia, mentre l'Adapter riusa una vecchia interfaccia. L'adapter fa in modo che due interfaccie esistenti lavorino insieme piuttosto che crearne una tutta nuova. 
 
 
@@ -100,14 +107,32 @@ Quando ho bisgno di una struttura come quella delle cartelle sul PC
 ## Come implementarlo
 
 1. Assicurarsi che si vuole rappresentare una intera relazione gerarchica.
+
 2. Considerando il "Contenitori che contengono contenuti i quali a loro volta possono essere contenitori" e dividere i contenuti dai contenitori. 
+
 3. Creare l'interfaccia che rende intercambiabile i contenuti con i contenitori. Che specifichi il comportamento che deve essere esercitato in modo uguale su Container o Continee
+
 4.  **Container** e **Continee** sono in una relazione *is a* con l'interfaccia
+
 5. I **Container**  sono in una relazione *has a* 1aMOLTI con l'interfaccia
+
 6.  Le classi di contenitori sfruttano il polimorfismo per delegare ai propri oggetti contenitori.
+
 7. I metodi `addChild()` e `removeChild()` avrebbe più senso averli nella classe Composite ma dato che vogliamo trattare uniformamente Leaf e Composite  vengono invece inseriti nella classe Component. Sacrificando la *trasparenza* per la *sicurezza*
 
 ## Differenze con altri pattern
+
+* Il composite e il **Decorator** hanno una struttura simile perchè entrambi usano la composizione ricorsiva per organizzare un numero illimitato di oggetti
+
+*  (?) Composite can be traversed with Iterator. Visitor can apply an operation over a Composite. Composite could use Chain of Responsibility to let components access global properties through their parent. It could also use Decorator to override these properties on parts of the composition. It could use Observer to tie one object structure to another and State to let a component change its behavior as its state changes.
+
+*  Mediator ...
+
+*  Composite e **Decorator** spesso vengono usati insieme perchè i loro usi sono complementari: 
+    *  Decorator aggiunge caratteristiche agli oggetti senza ricorrere all'ereditarietà
+    *  Composite si focalizza di più sulla rappresentazione che non sull'abbellimento
+
+* Spesso si usa il Composite insieme al **FlyWeight** per implementare delle foglie condivise. 
 
 
 
