@@ -157,7 +157,11 @@ Può però trattare un insieme di oggetti eterogeneo in maniera **atomica** (o t
 
 ## Intento
 
+Vuole aggiungere delle funzionalità ad un ogggetto anche **dinamicamente** e lo fa senza ricorrere all'utilizzo di *sottoclassi*. Un componente può essere abbellito da un altro avvolgendolo ricorsivamente.
 
+> "*Incarta un regalo, mettilo in una scatola e quindi incarta anche quella*"
+
+Voglio quindi aggiungere un comportamento o uno stato in *run-time*. Però per farlo non posso usare la ereditarietà perchè non è dinamica ma statica. 
 
 ## Discussione
 
