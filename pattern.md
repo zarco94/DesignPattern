@@ -32,7 +32,12 @@ L'adapter avvolge una classe presistente e mi restituisce una traduzione di ques
 * Il client interagisce solo con l'interfaccia Target la quale implementa dei metodi che il client riconosce
 * L'interfaccia poi viene implementata dalla classe Adapter che iplementa i metodi dell'interfaccia in modo che chiamino i metodi dell'Adaptee nella maniera corretta. 
 
+## Come implementarlo
 
+1. **Identifica i soggetti**: identificare qual'è il Client e chi è l'Adaptee.
+2. **Identifica l'interfaccia**: capire qual'è l'interfaccia di cui ha bisogno il Client.
+3. **Creare la classe Adapter** che implementa l'interfaccia e i suoi metodi chiamando i metodi dell'Adaptee
+4. Per farlo la classe Adapter deve avere il metodo della classe Adaptee
 
 
 

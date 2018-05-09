@@ -29,6 +29,7 @@
 <li><a href="#intento">Intento</a></li>
 <li><a href="#discussione">Discussione</a></li>
 <li><a href="#struttura">Struttura</a></li>
+<li><a href="#come-implementarlo">Come implementarlo</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -47,8 +48,15 @@
 <p><img src="/Users/gabriele/Università/2%20anno/2%20semestre/ingegneria%20Software/APPUNTI%20ing.%20software/res/adapter.png" /></p>
 <ul>
 <li>Il client interagisce solo con l’interfaccia Target la quale implementa dei metodi che il client riconosce</li>
-<li>L’interfaccia poi viene implementata dalla classe Adapter che traduce</li>
+<li>L’interfaccia poi viene implementata dalla classe Adapter che iplementa i metodi dell’interfaccia in modo che chiamino i metodi dell’Adaptee nella maniera corretta.</li>
 </ul>
+<h2 id="come-implementarlo">Come implementarlo</h2>
+<ol type="1">
+<li><strong>Identifica i soggetti</strong>: identificare qual’è il Client e chi è l’Adaptee.</li>
+<li><strong>Identifica l’interfaccia</strong>: capire qual’è l’interfaccia di cui ha bisogno il Client.</li>
+<li><strong>Creare la classe Adapter</strong> che implementa l’interfaccia e i suoi metodi chiamando i metodi dell’Adaptee</li>
+<li>Per farlo la classe Adapter deve avere il metodo della classe Adaptee</li>
+</ol>
 <hr />
 </body>
 </html>
