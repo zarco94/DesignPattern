@@ -1,0 +1,1 @@
+pandoc -s -f markdown -t html5 /Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/2018-4-10.md   --css /Users/gabriele/Programmi/CSS/BLU.css --toc -o HTML/2018-4-10.html

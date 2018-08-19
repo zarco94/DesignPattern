@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>Verifica e Convalida</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Verifica e Convalida</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">27 marzo 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#terminologia">Terminologia</a><ul>
+<li><a href="#convalida">Convalida:</a></li>
+<li><a href="#verifica">Verifica:</a></li>
+</ul></li>
+<li><a href="#errore-bug">Errore (BUG)</a><ul>
+<li><a href="#malfunzionamento-failure">Malfunzionamento (Failure)</a></li>
+<li><a href="#difetto-o-anomalia-fault">Difetto o Anomalia (Fault)</a></li>
+<li><a href="#errore-error">Errore (Error)</a></li>
+<li><a href="#ariane-5">Ariane 5</a><ul>
+<li><a href="#malfunzionamento">Malfunzionamento</a></li>
+<li><a href="#anomalia">Anomalia</a></li>
+<li><a href="#errore">Errore</a></li>
+<li><a href="#considerazioni">Considerazioni</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#statico-vs-dinamico">Statico vs Dinamico</a><ul>
+<li><a href="#tecniche-statiche">Tecniche statiche</a></li>
+<li><a href="#tecniche-dinamiche">Tecniche Dinamiche</a></li>
+</ul></li>
+<li><a href="#classificazione-delle-tecniche">Classificazione delle tecniche</a></li>
+<li><a href="#prova-formale">Prova formale</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#debugging">Debugging</a></li>
+<li><a href="#definizioni">Definizioni</a><ul>
+<li><a href="#correttezza-programma">Correttezza Programma</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#successo-del-test">Successo del test</a></li>
+<li><a href="#test-ideale">Test ideale</a></li>
+</ul></li>
+<li><a href="#criterio">Criterio</a><ul>
+<li><a href="#qualità-criteri">Qualità Criteri</a><ul>
+<li><a href="#affidabile">Affidabile</a></li>
+<li><a href="#valido">Valido</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#teorema">Teorema</a><ul>
+<li><a href="#criterio-a-priori-valido">Criterio a priori valido</a></li>
+</ul></li>
+<li><a href="#problema-delloracolo">Problema dell’oracolo</a></li>
+<li><a href="#approccio-white-box">Approccio White Box</a></li>
+<li><a href="#criterio-di-copertura">Criterio di Copertura</a><ul>
+<li><a href="#copertura-di-tutti-i-comandi">[1] Copertura di tutti i comandi</a><ul>
+<li><a href="#grafo-di-controllo">Grafo di controllo</a></li>
+</ul></li>
+<li><a href="#copertura-delle-decisioni">[2] Copertura delle decisioni</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr />
+<h1 id="terminologia">Terminologia</h1>
+<h3 id="convalida">Convalida:</h3>
+<blockquote>
+<p>confronto del software con le idee e i bisogni dell’utente <strong>informali</strong> (espressi o inespressi). Controllare che si è fatto quello che voleva.</p>
+<p>Nella convalida verifico l’usabilità e quando chiedo un feedback all’utente</p>
+</blockquote>
+<h3 id="verifica">Verifica:</h3>
+<blockquote>
+<p>confronto del sftware e dei suoi sottoprodotti con le specifiche <strong>formali</strong> scritte e raccolte dall’analista quando ha parlato con l’utente.</p>
+<p>Quando faccio Test automatico</p>
+</blockquote>
+<p>Il confine tra verifica e convalida spesso non è così visibile. Spesso se alcune cose generiche sono facilmente interpretabili e quindi non posso verificarlo ma solo convalidarlo. (ES): <em>finisce in poco tempo</em></p>
+<p>Servono quindi delle specifiche formali per evitarlo.</p>
+<h1 id="errore-bug">Errore (BUG)</h1>
+<p>qundo usiamo queste parole indichiamo spesso cose diverse. C’è una terminologia apposta.</p>
+<h3 id="malfunzionamento-failure">Malfunzionamento (Failure)</h3>
+<ul>
+<li>funzionamento non corretto di un programma</li>
+<li>è legato al funzionamento del programma e <strong>non</strong> al suo codice</li>
+</ul>
+<h3 id="difetto-o-anomalia-fault">Difetto o Anomalia (Fault)</h3>
+<p>è legato al codice ed è condizione necessaria (ma non sufficente) per il verificarsi di un malfunzionamento</p>
+<p>NB se non ci sono anomalie non ci sono malfunzionamenti mentre può essere vero il contrario. Per avere un malfunzionamento ci deve esssere un anomalia da qualche parte.</p>
+<p>Non vale il contrario perchè potrebbero esserrci due errori che si compensano. Non è percepibile come malfunzionamento.</p>
+<h3 id="errore-error">Errore (Error)</h3>
+<p>è la causa di un anomalia.</p>
+<p>in genere si tratta di errori umani:</p>
+<ul>
+<li>concettuale</li>
+<li>battitura</li>
+<li>scarsa conoscenza del linguaggio</li>
+</ul>
+<h2 id="ariane-5">Ariane 5</h2>
+<h3 id="malfunzionamento">Malfunzionamento</h3>
+<p>dopo 40 secondi esplode il razzo Ariane 5. Dal punto di vista esterno è stato subito chiaro il problema (è esploso). E anche dalla sala controllo se ne erano accorti perchè uscivano un sacco di errori perchè creschava il sistema di riferimento inerziale. Sono loro che lo hanno fatto esplodere per sicurezza. Il malfunzionamento che sembrava a tutti in teoria (esplosione) non era quello ma un altro.</p>
+<h3 id="anomalia">Anomalia</h3>
+<p>un float veniva assegnato ad un int e andava in overflow. Da 64 bit a 16 bit. Il sistema tirava un eccezione che non veniva gestito.</p>
+<h3 id="errore">Errore</h3>
+<p>il codice era scritto bene perchè non era fatto per l’Arian 5 ma per l’Arian 4. Quella riga calcolava la pendenza di decollo del razzo che per l’Arien 4 era molto più basso. Andava bene anche un int</p>
+<p>Errore è stato riutilizzare un codice dando per scontato fosse funzionante (dato che aveva sempre funzionato) senza mai testare una situazione reale.</p>
+<h3 id="considerazioni">Considerazioni</h3>
+<p>E in più le eccezioni erano usate solo per i controlli HW e non SW. Il SW è considerato come componente secondario.</p>
+<p>Il software può creare problemi enormi anche per anomalie molto piccole. (ES) team inglese e americano che fanno progetto insieme e uno usa le miglia e l’altro i metri.</p>
+<h1 id="statico-vs-dinamico">Statico vs Dinamico</h1>
+<h2 id="tecniche-statiche">Tecniche statiche</h2>
+<p>tutte le tecniche che lavorano suil codice senza eseguirlo.</p>
+<p>la sto facendo su elementi del codice e non su elementi di stato di evoluzione del programma. Quindi la loro complessità dipende dalla dimensione del programma e non dall’evoluzione</p>
+<ul>
+<li>metodi formali</li>
+<li>analisi Data Flow</li>
+<li>Modelli Statistici</li>
+</ul>
+<p>Sono molto più applicabili anche a programmi molto grossi. Perchè è qualcosa di sicuramente finito.</p>
+<h2 id="tecniche-dinamiche">Tecniche Dinamiche</h2>
+<p>tutte le tecniche che lavorano sul codice e lo devono eseguire.</p>
+<p>Si guuarda il numero di stati in cui si può trovare il sistema che è enormemente più grande di quante righe di codice vengono scritte. La loro complessità è molto elevata per programmi grossi.</p>
+<ul>
+<li>Testing</li>
+<li>Debugging</li>
+</ul>
+<h1 id="classificazione-delle-tecniche">Classificazione delle tecniche</h1>
+<p>cosa possiamo fare per trovare un problema. Voglio sapere se sono in grado di rispondere all domanda: Sono capace che il software è corretto al 100%?</p>
+<p>Non è possibile! Servirebbe testare tutti gli input. MI servirebbe tanto tempo quanto la durata dell’universo.</p>
+<p>Risolvo in 3 modi:</p>
+<ol type="1">
+<li><p><strong>Semplifico il processo:</strong></p>
+<p>Mi pongo una domanda più semplice e meno complessa: Sono corrette le funzionalità principali del mio programma?</p></li>
+<li><p><strong>Innacuratezza pessimistica</strong>:</p>
+<p>Altrimenti posso dire: Se non posso dimostrarti che è corretto dico che non è corretto. Non voglio dire che è corretto se non sono sicuro quindi piuttosto dico che è scorretto</p></li>
+<li><p><strong>Innaccuratezza Ottimistica</strong>:</p>
+<p>è quella del testing. Faccio un po’ di prove che tengono conto dei casi esemplari. Se passa quelli però non è detto che sia corretto, ma io dico che è corretto</p></li>
+</ol>
+<p>Posso usare uno di questi tre metodi indipendentemente uno dall’altro. Devo però essere consapevole di quale sto usando.</p>
+<h1 id="prova-formale">Prova formale</h1>
+<blockquote>
+<p>sono tecniche che si prefiggono di provare l’assenza di <em>anomalie</em> (e quindi anche malfunzionamento) nel prodotto finale</p>
+</blockquote>
+<p>es:</p>
+<ul>
+<li>..</li>
+<li>..</li>
+</ul>
+<h1 id="testing">Testing</h1>
+<blockquote>
+<p>Tecniche di verifica che si prefiggono di rilevare <em>malfunzionamenti</em></p>
+<p>o fornire fiducia del prodotto (test di accettazione)</p>
+</blockquote>
+<p>NB il testing non è sinonimo di verifica. E’ un tipo di verifica</p>
+<p>es:</p>
+<ul>
+<li><strong>White Box</strong> = scatola che mi permette di guardare dentro. Posso scegliere gli input, conoscendo il mio codice.</li>
+<li><strong>Black Box</strong> = non conosco il mio codice. La scelta dell’input non posso farla partendo dal codice.</li>
+<li><strong>Gray Box</strong> = conosco l’architettura sottostante (es. c’è un database. c’è un pattern MVC). Uso degli input che vanno a stimolare tutte le parti.</li>
+</ul>
+<h1 id="debugging">Debugging</h1>
+<blockquote>
+<p>Tecnica che si prefigge di provare anomalie che causano malfunzionamento. Parto da un punto in cui so già che c’è un malfunzionamento e so qual’è e posso riprodurlo.</p>
+</blockquote>
+<p>Partendo da qui provo a risolvere l’errore.</p>
+<p>es:</p>
+<ul>
+<li>riproduco li stati intermedi dell’esecuzione del programma. eli testo uno a uno (printf ovunque)</li>
+<li>Approccio incrementale: tolgo parte del codice fino a che non crasha più. così da scoprire qual’è la sezione di codice che ha il difetto</li>
+</ul>
+<h1 id="definizioni">Definizioni</h1>
+<h2 id="correttezza-programma">Correttezza Programma</h2>
+<p>considerando un generico progamma <code>P</code> come una funzione da un insieme di dati<code>D</code> (dominio) a un insieme di dati <code>R</code> (codominnio)</p>
+<ul>
+<li><p><code>P(d)</code> indica l’esecuzione di P sul dato in ingresso d appartente a D</p></li>
+<li><p>il risultato P(d) è <strong>corretto</strong> se soddisfa le specifiche, altrimenti è scorretto.</p></li>
+<li><p><code>ok(P,d)</code> indica la correttezza di P per il dato d</p></li>
+</ul>
+<blockquote>
+<p>P è corretto <code>se e solo se</code> <code>per ogni d appart. D</code> ok(P,d)</p>
+</blockquote>
+<h2 id="test">Test</h2>
+<p>Un Test <code>T</code> per un programma P èun sottinsieme del dominio. Deve essere finito anche se il Dominio è infinito</p>
+<p>Un elemento del test è detto <strong>caso del test</strong>. Un test è un insieme di casi di test. E’ un insieme di stimolazioni.</p>
+<ul>
+<li>ESECUZIONE DEL TEST esecuzione del programma per tutti i casi di test <code>t</code> appartenenti al test T</li>
+</ul>
+<p>ok(P,T) &lt;-&gt; ∀t∈T ok(P,t)</p>
+<h2 id="successo-del-test">Successo del test</h2>
+<p><code>successo(T,P)</code></p>
+<p>un test ha <em>successo</em> quando <strong>TROVA</strong> gli errori prima ignoti</p>
+<p>Se il test non ha successo il programma passa il test</p>
+<h2 id="test-ideale">Test ideale</h2>
+<p>T è ideale su P se e solo se: ok(P, T) -&gt; ok(P, D)</p>
+<blockquote>
+<p>cioè se la correttezza sui soli casi di test mi implica la correttezza su tutto il dominio</p>
+</blockquote>
+<p>In generale è impossibile trovare un test ideale. L’unico test ideale che posso fare è se T è uguale a D. Ma è impossibile dal punto di vista del tempo</p>
+<p>Non posso scegliere a caso i miei test. Devo prendere dei casi signoficativi, secondo un <strong>criterio di scelta</strong></p>
+<h1 id="criterio">Criterio</h1>
+<blockquote>
+<p>prendere un sottominio come test seguendo un certo ragionamento</p>
+</blockquote>
+<h2 id="qualità-criteri">Qualità Criteri</h2>
+<h3 id="affidabile">Affidabile</h3>
+<blockquote>
+<p>un criterio è affidabile se dati 2 test qualsiasi T1 e T2 entrambi selezionati secondo un criterio C se quando ha successo uno ha <strong>sempre</strong> successo anche l’altro</p>
+</blockquote>
+<p>Come faccio a definire un criterio affidabile? Non esiste un criterio affidabile perchp nonn ne posso essere certo. L’unico test affidabile è quello che ha un solo test (un solo gruppo di stimolazioni)</p>
+<h3 id="valido">Valido</h3>
+<blockquote>
+<p>un criterio è <strong>valido</strong> se qual’ora il programma P è non corretto allora almeno <em>uno</em> dei test deve avere successo</p>
+</blockquote>
+<p>0:21:21</p>
+<p>Un criterio potrebbe essere valido ma non affidabile o viceversa. Ma io ne vorrei uno sia affidabile che valido. Il test posso farlo però sia affidabile che valido solo se conosco come è il programma. Voglio però che siano validi e affidabile per qualsiasi programma</p>
+<h1 id="teorema">Teorema</h1>
+<p>se hai un test valido e affidabile e il tuo test falliscw allora il tuo programma funziona</p>
+<p>Perchp</p>
+<ul>
+<li>essendo valido se c’era un errore almeno uno dei test lo deve trovare (valido)</li>
+<li>tutti i test danno lo stesso risultato (affidabile)</li>
+</ul>
+<p>allora mi bast averificare un solo test per vedere se i programma è corretto: tutti gli altri mi darebbero lo stesso risultato quindi se almeno uno ha successo allora tutti hanno successo</p>
+<p>Se esistesse un criterio aff e valido contemporaneamente selezionerebbe solo test ideali ===&gt; non può esistere questo criterio.</p>
+<h2 id="criterio-a-priori-valido">Criterio a priori valido</h2>
+<p>Dominio infinito</p>
+<p>Sottoinsiemi del dominio finiti</p>
+<p>Dovrei essere capace di coprire con test finiti un insieme infinito perchè non solo con quale valore del dominio, in quale parte del dominio, c’è il problema</p>
+<p>E’ possibile solo con un criterio che mi dia infiniti test. Ma io voglio un criterio proprio però per evitare di avere infinite cose da controllare, ma solo un caso significativo</p>
+<h1 id="problema-delloracolo">Problema dell’oracolo</h1>
+<p>Devo sapere qual’è il risultato esatto che mi deve fare il test. Chi mi calcola il risultato esatto? Devo farmelo a mano io?</p>
+<h1 id="approccio-white-box">Approccio White Box</h1>
+<dl>
+<dt>gli errori si annidano negli angoli</dt>
+<dd>nelle zone del programma che non ho considerato, nei casi speciali e particolari e meno comuni del mio dominio.
+</dd>
+</dl>
+<p>Cioè Errori logici e assunzioni corrette sono inversamente proporzionali alla probabilita` che un certo cammino venga eseguito</p>
+<p>In più spesso quello che ci sembra un cammino molto raro e particolare spesso è in realtà un percorso molto usato.</p>
+<p>Gli errori di battitura stupidi e casuali possono creare dei problemi enormi.</p>
+<p>L’errore può essere ovunque.</p>
+<p>Perchè un caso di test trovi un malfunzionamento devono accadere tre cose:</p>
+<ul>
+<li>il test deve stimolare l’anomalia.</li>
+<li>l’eseuczione di quel comando deve essere tale che il difetto venga evidenziato arrivando ad uno styato inconsistente</li>
+<li>l’inconsistenza si deve propagare fino a diventare evidente e visibile</li>
+</ul>
+<h1 id="criterio-di-copertura">Criterio di Copertura</h1>
+<p>Ad ogni criterio è possibile associare una misura di copertura. Cioè coprire totalmente un criterio = lo soddisfo in pieno oppure coprirlo ad una certa percentuale.</p>
+<p>Posso coprire un criterio anche solo all’80%</p>
+<p>Posso così decidere qunado fermare il test. Magari non controllo tutto ma riesco a controllare una buona percentuale</p>
+<h2 id="copertura-di-tutti-i-comandi">[1] Copertura di tutti i comandi</h2>
+<p>Criterii di copertura che per ogni comando del mio comando deve esserci almeno un caso di test che vada a stimolarmi quel comando. Se un comando non fosse stimolato non saprò mai se c’è un errore in quel comando dato che non lo copre. Non c’è copertura su quel comando. Per vedere un errore devo per forza eseguire i comandi per cheè non conosco il programma.</p>
+<p>La percentuale diventa quindi comandi eseguiti / comandi eseguibili</p>
+<p>es. copre i 5/7 del programma</p>
+<p>comandi eseguibili (=comandi non raggiungilbili ===&gt; non c’è bisgno di coprirli quando faccio il test)</p>
+<h3 id="grafo-di-controllo">Grafo di controllo</h3>
+<blockquote>
+<ul>
+<li>ogni istruzione è un nodo</li>
+<li><p>le frecce mi portano tra le varie istreuzioni.</p></li>
+<li><p>Ramificazioni = if</p></li>
+</ul>
+</blockquote>
+<p>Criterio di copertura dei comandi è intrensecamente valido perchè sono inifiniti e tra loro trova sicuramente l’errrore. Non è affidabile ma è valido</p>
+<p>Coprire i comandi vuol dire coprire i nodi</p>
+<p>Ma potrei volere ocprire anche l’arcio percheè sono i diversi modi n cui arrivo ad un istruzione. Magari arrivare da un istruzione o da un altra mi porta o meno ad un problema. Voglio coprire tutti gli archi e quindi tutti i modi in cui ci psosso arrivare. Copro quindi tutte le decisioni. Ogni volta che c’è una decisione e quindi una ramificazione controllo tutte le decisioni</p>
+<h2 id="copertura-delle-decisioni">[2] Copertura delle decisioni</h2>
+<blockquote>
+<p>Un test soddisfa il criterio di copertura delle decisioni se e solo se ogni arco del grafo di controllo del programma è percorso almeno una volta in corrispondenza di almeno un dato di test t contenuto in T</p>
+</blockquote>
+<p>1:00:19</p>
+<hr />
+</body>
+</html>

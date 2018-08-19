@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>UML | Pattern</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">UML | Pattern</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">28 marzo 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#superstates">Superstates</a></li>
+<li><a href="#mvc-pattern">MVC Pattern</a></li>
+</ul>
+</nav>
+<hr />
+<h1 id="superstates">Superstates</h1>
+<p>è un meccanismo che viene usato per due scopi:</p>
+<ul>
+<li>componibilità che rende più leggibile e generalizza</li>
+<li>componibilità che permette la concorrenza</li>
+</ul>
+<h1 id="mvc-pattern">MVC Pattern</h1>
+<p>serve per creare una interfaccia grafica</p>
+<p>abbiamo :</p>
+<ul>
+<li><strong>M</strong>odel: dei dati</li>
+<li><strong>V</strong>iew: una visualizzazione</li>
+<li><strong>C</strong>ontroller: un modo in cui i dati interagiscono con i dati</li>
+</ul>
+<p>è qualcosa che avviene in qualsiasi programma. Indipendentemente da come viene implementato, da quale interfaccia uso o da come fornisco l’input</p>
+<p>I dati potrebbero essere comuni ad altre applicaziion, quindi se campbiano devo aggiornar le mie viste.</p>
+<p>Corrisponde alla composizione di diversi pattern</p>
+<ul>
+<li><p>OBSERVER:</p>
+le viste sono degli osservatori dei modelli, le diverse viste si registrano tutte su un modello. Sono osservatori e osservato (le view sono osservatori del modello)</li>
+<li><p>STRATEGY:</p>
+tra viste e controller. …. Defiisco un</li>
+<li><p>COMPOSITE:</p>
+<p>le interfacce le faccio come composizioni di più elementi. Le varie viste sono messe una dentro l’altra. Ho diversi modi di raggruppamento</p></li>
+</ul>
+<p>Il fatto di avere tre pattern insime non è facile da comprendere e da gestire. Infatti di solito lo fanno i framework. Ti chiedono l’interfaccia, il modello, e poi il collegamento lo fa il framework</p>
+<p><a href="http://todomvc.com">todomvc.com</a> ===&gt; crea una todoList e mi da un’implementazione in 30 frameork diversi (react, nodejs ecc)</p>
+<p>Si riesca di creare la simulazione stupida di un dataBase. Get dato / Set dato</p>
+<hr />
+</body>
+</html>

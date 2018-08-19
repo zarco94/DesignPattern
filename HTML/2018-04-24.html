@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>Verifica e Convalida</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Verifica e Convalida</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">24 marzo 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#altri-criteri-di-copertura">Altri criteri di copertura</a><ul>
+<li><a href="#gestire-i-cicli">Gestire i cicli</a></li>
+</ul></li>
+<li><a href="#analisi-data-flow">Analisi Data Flow</a><ul>
+<li><a href="#regole-data-flow">Regole Data Flow</a><ul>
+<li><a href="#au">au</a></li>
+<li><a href="#dd-da">dd da</a></li>
+<li><a href="#aa">aa</a></li>
+</ul></li>
+<li><a href="#sequenza">Sequenza</a></li>
+<li><a href="#data-flow-come-criterio-di-copertura-criterio-delle-definizioni">Data flow come criterio di copertura = Criterio delle definizioni</a></li>
+<li><a href="#criterio-di-copertura-degli-usi">Criterio di copertura degli Usi</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr />
+<p>Con le condizioni composte otteniamo dei test che esplodono e hanno troppi casi. Se invece rimango stoto la solgia e mantengo</p>
+<h1 id="altri-criteri-di-copertura">Altri criteri di copertura</h1>
+<p>è più efficace fare un test semplice insieme all’analisi statica piuttosto che un test complesso.</p>
+<h2 id="gestire-i-cicli">Gestire i cicli</h2>
+<p>non abbiamo ancora considerato i cicli e le iterazioni, ma solo</p>
+<p>N copertura dei cicli voglio che il mio test testi N iterazioni di cicli. Non lo faccio sul ciclo infinito ma solo su un numero finito N. Qual’è N? Posso scegliere un N che voglio ma i cammini possibili crscono esponenzialmente.</p>
+<p>N = 2 equivale già a differenziale un if da un ciclo.</p>
+<p>Un ciclo eseguito 0 volte vuol dire che (testa la condizioni in cui) le postcondizioni devono essere già valide…</p>
+<p>Un ciclo eseguito 1 volta vuol dire che (testa la condizione in cui) le postcondizioni devono essere valide al verificarsi della condizione di uscita…</p>
+<p>Un ciclo eseguito piu’ di 1 volta testa la condizione in cui l’invariante di ciclo piu’ le condizioni di uscita implicano le condizioni di uscita…</p>
+<p>Anche l’N copertura posso considerarlo come una copertura fattibile.</p>
+<p>fino ad adesso abbiamo creato critri partendo dal grafo di controllo…possiamo partire da come è fatto il codice?</p>
+<p>COmplementare al flusso di controllo abbiamo anche dei grafi dhe analizzano il <strong>flusso dei dati</strong>. I dati però sono qualcosa che evolve e quindi dinamici. Devo eseguire per capire i codici. Dovrei fare esecuzione per vedere se fare un esecuzione o meno.</p>
+<p>Ma sui dati oposso lavorare anche staticamnte ==&gt; Analisi data flow</p>
+<h1 id="analisi-data-flow">Analisi Data Flow</h1>
+<p>non nasce come analisi di test ma per fare ottimizzazione dei compilatori linguaggi di programmazione</p>
+<p>le tipologie di operazioni che posso fare sui dati le posso classificare in maniera diversa</p>
+<ul>
+<li>oeprazione di <strong>definizione</strong>: cmabio il valore ad una variabile in maniera deterministica (prevista) (es assegnamento o una read o una funzine che cmabia il valore della variabile)</li>
+<li>operazione di <strong>uso</strong>: sto usando un valore, lo sto vedendo (print, ++i=uso il valore, lo definisco e lo uso di nuovo)
+<ul>
+<li>predicativo</li>
+<li>nelle condizioni vero/falso</li>
+</ul></li>
+<li>operazione di <strong>annullamentoi</strong>: viene cambiato il valore ma non posso fare affidamento su quello che c’è dentro dopo. (es variabile chiamata ma non assegnata in C, o quando una variabile locale esce dalla scope di quella variabile)</li>
+</ul>
+<p>per ogni variabile de mio programma posso vedere le sequenze di definizione, usoi e annaullamenti che succedo a quella variabile. In maniera statica</p>
+<p>Il compiolatore usa questi data flow per vedere se può ottimizzare duqlcosa (se ho due definizinoi consecutive per la stessa variabile posso anche togliere la prima)</p>
+<p>In ingegneria del software invece se c’è qualcosa di strano vado a vedere se è anche giusto o sbagliato</p>
+<h2 id="regole-data-flow">Regole Data Flow</h2>
+<p>non sono errori perchè li posso tradurre ma dal punto di vista ingengneristico sono errori. Infatti alcune cose di queste in Java non si possono fare e in C invece si (sono Warning) .. quindi non sono errori assoluti.</p>
+<h3 id="au">au</h3>
+<blockquote>
+<p>L’uso di una variabile x deve sempre essere preceduto in ogni sequenza da una definizione senza annullamenti intermedi</p>
+<p>… au … ERRORE</p>
+</blockquote>
+<h3 id="dd-da">dd da</h3>
+<blockquote>
+<p>La definizione di una variabile deve sempre essere seguita da un uso prima di un suo annullamento o definizione</p>
+<p>… dd … ERRORE<br />
+… da … ERRORE</p>
+</blockquote>
+<p>Potrebbe anche essere che una dd sia corretta perchè magari la scrittura sia più leggibile</p>
+<h3 id="aa">aa</h3>
+<p>prima di</p>
+<h2 id="sequenza">Sequenza</h2>
+<p>P(p; a) indica la sequenza ottenuta per la variabile a eseguendo il cammino p</p>
+<p>Per rappresnetare P in caso di cammini con cicli o di decisioni uso delle espressioni regolari:</p>
+<ul>
+<li><code>|</code> —–&gt; pe rappresentare alternative</li>
+<li><code>[]</code> —–&gt; per rappresentare opzionalita (0..1) * per rappresentare cicli (0..n)</li>
+<li><code>+</code> —–&gt; per rappresentare cicli (1..n)</li>
+</ul>
+<h2 id="data-flow-come-criterio-di-copertura-criterio-delle-definizioni">Data flow come criterio di copertura = Criterio delle definizioni</h2>
+<blockquote>
+<p>Un test T soddisfa il criterio di copertura delle definizioni se e solo se per ogni nodo i e ogni variabile x appartenente a def(i) T include un cammino libero da definizioni da i ad almeno uno degli elementi di du(i,x)</p>
+</blockquote>
+<p>ogni definizione viene ricontrallato da uno dei sui possibili usi.</p>
+<p>[formula in foto]</p>
+<h2 id="criterio-di-copertura-degli-usi">Criterio di copertura degli Usi</h2>
+<blockquote>
+<p>Un test T soddisfa il criterio di copertura degli usi se e solo se per ogni nodo i e ogni variabile x appartenente a def(i) T include un cammino libero da definizioni da i ad ogni elemento di du(i,x)</p>
+</blockquote>
+<p>[formula in foto]</p>
+<p>L’unica cosa che cambia è il per ogni al posto dell’esiste. Il per ogni però non mi richiede che ce ne sia almeno un (potrebbe non essercene neanche uno), mentre l’esiste me ne cheiede almeno uno</p>
+<p>devo controllare tutti gli usi con dei test prendendo dei cammini che mi prendano tutti gli usi. Se un cammino non mi passa su tutti gli usi allora mi serve averne un altro che tocca gli usi che non prende quelli non presi prima.</p>
+<p>Devo scegliere se prendere dei cammini che mi minimizzano il numero di cammini che mi servono per completare il test, oppure minimizzare il numero di iterazione per ogni singolo caso di test. Devo scegliere quello dei due che mi minimizza il tempo di esecuzione del test.</p>
+<hr />
+</body>
+</html>

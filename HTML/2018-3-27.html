@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>Object Orientation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Object Orientation</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">27 marzo 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#concetti-dellobject-orientation">Concetti dell’Object Orientation</a></li>
+<li><a href="#programmazione-modulare">Programmazione Modulare</a><ul>
+<li><a href="#principi-programmazione-modulare">Principi Programmazione Modulare</a></li>
+<li><a href="#relazioni-fra-moduli">Relazioni fra moduli</a><ul>
+<li><a href="#tipi-di-relazione">Tipi di relazione</a></li>
+</ul></li>
+<li><a href="#astrazione-e-encapsulation">Astrazione e encapsulation</a></li>
+<li><a href="#tipi-di-moduli">Tipi di Moduli</a></li>
+</ul></li>
+<li><a href="#object-orientation">Object Orientation</a><ul>
+<li><a href="#classi">CLassi</a></li>
+</ul></li>
+<li><a href="#uml">UML</a><ul>
+<li><a href="#metamodello">Metamodello</a></li>
+<li><a href="#diagrammi-uml">Diagrammi UML</a></li>
+<li><a href="#diagrama-delle-classsi">Diagrama delle classsi</a></li>
+</ul></li>
+<li><a href="#generalizzazione">GENERALIZZAZIONE</a><ul>
+<li><a href="#in-uml">IN UML</a><ul>
+<li><a href="#overriding">Overriding</a></li>
+<li><a href="#classi-astratte">Classi Astratte</a></li>
+</ul></li>
+<li><a href="#protezione">Protezione</a><ul>
+<li><a href="#protected">Protected</a></li>
+<li><a href="#package">Package</a></li>
+</ul></li>
+<li><a href="#formattazione-uml">Formattazione UML</a><ul>
+<li><a href="#corsivo">Corsivo</a></li>
+<li><a href="#sottolineato">Sottolineato</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#polimorfismo">POLIMORFISMO</a></li>
+<li><a href="#collegamento-dinamico">COLLEGAMENTO DINAMICO</a></li>
+<li><a href="#come-uso-i-concetti-delloo">Come uso i concetti dell’OO</a><ul>
+<li><a href="#principio-di-sostituzione-di-liskov">Principio di sostituzione di Liskov</a></li>
+<li><a href="#design-by-contract">Design by contract</a></li>
+</ul></li>
+<li><a href="#associazioni">Associazioni</a><ul>
+<li><a href="#navigabilità-associazioni">Navigabilità associazioni</a></li>
+<li><a href="#associazioni-e-attributi">Associazioni e attributi</a><ul>
+<li><a href="#errore">Errore</a></li>
+<li><a href="#prossima-lezione."><a href="./2018-7-28.pdf">Prossima Lezione. &gt;</a></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<hr />
+<h1 id="concetti-dellobject-orientation">Concetti dell’Object Orientation</h1>
+<p>l’OO non è un linguaggio ma un modo di pensare e di interfacciarsi ai metodi risolutivi</p>
+<p>Si può progammare ad oggetti anche in C o assembly. Ovvio che se il linguaggio ha gli stessi costrutti e astrazioni dell’OO è più facile, ma non è impossibile con altri linguaggi</p>
+<p>Per capire il problema lo penso OO e poi però posso implementarlo come voglio, anche in C</p>
+<p>OO non risolve il problema, mi da un modo per risolverlo, degli strumenti</p>
+<p>Ha pochissimi concetti, anche banali</p>
+<ul>
+<li>classi e ereditarietà</li>
+<li>polimeorfismo</li>
+<li>collegamento dinamico</li>
+</ul>
+<p>non sempre sono facili da usare però, e spesso si fanno dei grandi errori. Soprattrurro perchè sono concetti sempllici.</p>
+<p>Per esempio finisce che ho 50 classi quando me ne servono solo 4</p>
+<p>E’ uno dei metodi per risolvere ma non è l’unico e non sempre è il migliore (progr. funzionale, aspect orientation)</p>
+<h1 id="programmazione-modulare">Programmazione Modulare</h1>
+<p>è il padre della OO</p>
+<p>es: MODULO A2</p>
+<p>la programmazione modulare ha una serie di ragionamenti su quello che deve fare un programma che è stato ereditato pari pari dall’OO. OO aggiunge cose nuove ma moltissime le prende dalla progr modulare</p>
+<h2 id="principi-programmazione-modulare">Principi Programmazione Modulare</h2>
+<ul>
+<li><p>astrazione: creare una scatola e darle un nome senza</p></li>
+<li><p><strong>encapsulation e information hiding</strong>: posso anche renderla opaca la scatola e posso usarla senza guardarci dentro</p></li>
+<li><p><strong>enca</strong>: chiudo a chiave la scatola e non posso usare quello che c’è dentro</p></li>
+<li><p><strong>tipi di modulo</strong>: ci sono diversi tipi di moduli</p></li>
+</ul>
+<h2 id="relazioni-fra-moduli">Relazioni fra moduli</h2>
+<p>matematicamente: dato l’insieme S di moduli allora una relazione è un sottoinsieme di SxS</p>
+<p>cioè un insime di coppie ordinate</p>
+<p>sono rappresentabili graficamente come un <strong>grafo orientato</strong></p>
+<h3 id="tipi-di-relazione">Tipi di relazione</h3>
+<ul>
+<li><p><strong>usa</strong>: il modulo A ha bisogno di quello che ha il modulo B -&gt; A usa B</p></li>
+<li><p><strong>is_component_of</strong>: B è composto da a1 a2 a3, vuol dire che se li metto insieme ottengo B. Mettendo insieme delle classi ottengo una generalizzaine più ambia a cui posso dare un nome</p></li>
+</ul>
+<p>attenzione alle relazioni cicliche. Non so più da dove partire perchè uno dipende dall’altro</p>
+<h2 id="astrazione-e-encapsulation">Astrazione e encapsulation</h2>
+<h2 id="tipi-di-moduli">Tipi di Moduli</h2>
+<p>storicamnete si sono create diverse tipologie di moduli</p>
+<ul>
+<li><p><strong>PROCEDURALE</strong> singole procedure senza dati</p></li>
+<li><p><strong>DATI</strong> sono solo dati: tabella che salva uno stato</p></li>
+<li><p><strong>ABSTARCT OBJECT</strong> ho solo l’oggetto astratto che mette insieme procedure e dati. E’ solo l’istanza, esiste solo quell’oggetto. Mi fornisce dei dati più delle funzioni che mi servono per lavorare su quei dati e posso interagirsci con la stesso livello d’astrazione dell’oggetto</p></li>
+<li><p><strong>ABSTRACT DATA OBJECT</strong> potrei voler più oggetti tutti uguali tra di loro. Mi serve un progetto di come è fatto un oggetto (clsse) da cui posso genereare tutte le istanze uguali che voglio.</p></li>
+<li><p><strong>GENERICI</strong> sono definizioni parziali di un qualcosa perchè parametriche rispetto ad un altro tipo di cui ti devo ancora parlare (interfacce). Devo stare attento qunado li uso ma sono molto utitli pe rsemplificare la compilazione e riduce gli errori</p></li>
+</ul>
+<h1 id="object-orientation">Object Orientation</h1>
+<p>si basa sui Abstract data type che chima CLASSI</p>
+<p>definisce nuove realazioni:</p>
+<ul>
+<li><p><strong>GENERALIZZAZIONI</strong> <em>(ereditarietà)</em> l’ereditarietà però e una cosa del linguaggio, è un modo per supportare la generaalizzazione, ma non è l’unico, posso creare una generalizzazione anche senza usare il meccanismo dalla ereditarietà</p></li>
+<li><p><strong>AGGREGAZIONE</strong> equivale a is_part_of non è composto ma è una parte, non lo completa tutto</p></li>
+</ul>
+<p>nuovi concetti (non possono esserci senza avere generalizzazione):</p>
+<ul>
+<li><p><strong>POLIMORFISMO</strong></p></li>
+<li><p><strong>COLLEGAMENTO DINAMICO</strong></p></li>
+</ul>
+<p>non sono legati uno all’altro, può esserci polimorfismo anche senza coll din e viceversa</p>
+<h2 id="classi">CLassi</h2>
+<p>permettono di definire un insieme di oggitti che condividono:</p>
+<ul>
+<li>Comportamenti (<em>metodi</em>)</li>
+<li>Conoscenze (<em>attributi</em>)</li>
+</ul>
+<p>sono il progetto di costruzione di un oggetto</p>
+<p>possono anche essere incomplete (<em>classe astratta</em>)</p>
+<p>permettono di saparae la definizione dell’intefaccia e della definizione vera e propria. Separano ciò che interagisce con l’esterno e nascondono in funzionamento (information hding)</p>
+<h1 id="uml">UML</h1>
+<p>è un linguaggio di <em>progettazione</em></p>
+<p>è l’unione di tre diverse idee di 3 informatici i tre linguaggi però non erano completamente compatibili e spesso non si sono messi d’accordo su alcune cose. Quindi le hanno prese tutte e tre e fanno scegliere all’utente.</p>
+<p>La prima versione era un gauzzabuglio di molti concetti presi da concetti differenti che si uniscono tutti insieme.</p>
+<p>in UML 2.0 si è iniziato a formalizzare i costrutti</p>
+<h2 id="metamodello">Metamodello</h2>
+<p>posso definire 4 livelli</p>
+<p>livello più basso: quello più vcino a noi livelllo 2: progettazione livello 1: come sono fatti i costrutti sottostanti livello 0: c’è solo la classe che generalizza tutto il resto</p>
+<h2 id="diagrammi-uml">Diagrammi UML</h2>
+<p>sono le foglie dell’albero in figura</p>
+<ul>
+<li>diagramma delle classi</li>
+<li>degli stati</li>
+<li>di sequenza</li>
+</ul>
+<p>gli altri sono comunque importanti ma questi sono i <strong>fondamentali</strong>.</p>
+<h2 id="diagrama-delle-classsi">Diagrama delle classsi</h2>
+<p>una classe è un rettangolo diviso in 3 zone</p>
+<ul>
+<li>nome classe</li>
+<li>attributi</li>
+<li>metodi</li>
+</ul>
+<p>ci sono alcuni simboli per indicare i gradi di protezione:</p>
+<ul>
+<li><code>+</code> publico</li>
+<li><code>-</code> privato</li>
+<li><code>~</code> package</li>
+<li><code>#</code> protected</li>
+</ul>
+<h1 id="generalizzazione">GENERALIZZAZIONE</h1>
+<p>è una relazione tra classi</p>
+<p>ci permette di definire una classe come una specializzazione di un altra classe. Non riparto a definirla da zero</p>
+<p>E’ la stessa classe con in più altre cose: è un write once. Permette quindi il riuso del codice: posso definire più classi da quella padre.</p>
+<p>ereditas tutto quello che ha la classe padre</p>
+<p>Una classe aggiunge attrributi e metodi dalla classe padre</p>
+<p>Può anche cambiare come svoglge un compito ereditato dalla classe padre</p>
+<p>non dovrebbe mai però eliminare degli attributi o dei metodi</p>
+<p>Può essere singola o multipla</p>
+<ul>
+<li>ho 1 padre</li>
+<li>ho N padri</li>
+</ul>
+<p>Java supporta solo l’eredità singola. L’eredità multipla però è comoda -&gt; permette implementaerd più di un interfaccia per la stessa classe.</p>
+<h2 id="in-uml">IN UML</h2>
+<blockquote>
+<p>è una freccia a linea continua con punta piena bianca</p>
+</blockquote>
+<p>classe dove c’è la punta della freccia è il padre, l’altro è il figlio da cui eredita tutto</p>
+<h3 id="overriding">Overriding</h3>
+<p>lo indico riscrivendo il nome della classe nella sottoclasse, se non lo riscrivo vuol dire che anche la sottoclasse ce l’ha perche lo eredita ma non lo ha ridefinito in maniera diversa. anche Non posso ridefinire delgili attributi, l’unica cosa che posso fare eè cambiare il tipo dell’attributo. Se lo faccio cambia proprio l’attributo</p>
+<h3 id="classi-astratte">Classi Astratte</h3>
+<p>Metodo in <em>corsivo</em>: è un metodo ASTRATTO, cioè qualcosa che è definito ma non ancora implementato</p>
+<p>se c’è almeno un metodo astratto in una classe allora non è completa. Quindi anche lei è astratta. Anche il suo nome va in corsivo</p>
+<p>Posso avevre classi astratte che non abbiano metodi astratti. Può sembrare completa ma magari io la voglio indicare come astratta e non completa.</p>
+<h2 id="protezione">Protezione</h2>
+<h3 id="protected">Protected</h3>
+<p>le classi che ereditano da un altra classe sono privilegiate. Possono avere un accesso diverso da quello di tutto il mondo rispetto alla classe padre.</p>
+<p>E’ il livello di protezione <code>protected</code> (<code>#</code>)</p>
+<h3 id="package">Package</h3>
+<p>solo le classi dello stesso package possono vedere i segreti è quello di default (quando non scrivo nulla).</p>
+<p>in UML: <code>~</code></p>
+<h2 id="formattazione-uml">Formattazione UML</h2>
+<h3 id="corsivo">Corsivo</h3>
+<ul>
+<li>per le classi e i metodi <strong>astratti</strong></li>
+</ul>
+<h3 id="sottolineato">Sottolineato</h3>
+<ul>
+<li>per gli attributi e metodi <strong>statici</strong></li>
+</ul>
+<h1 id="polimorfismo">POLIMORFISMO</h1>
+<p>permette di usare un oggetto A (appartente alla classe CA) ovunque possa essere usato un oggetto appartenente alla classe da cui CA eredita</p>
+<p>Se CA eredita da CB allora istanze della classe CA possono essere usate dove possono esserci istanze di CB</p>
+<p>i figli possono presentarsi al posto dei padri ma non viceversa</p>
+<p>non è solo riuso del codice</p>
+<p>è come se eredita _da == è un sottotipo_di</p>
+<p>la classe che eredita è un sottotipo del padre (animali -&gt; gatto)</p>
+<h1 id="collegamento-dinamico">COLLEGAMENTO DINAMICO</h1>
+<p>è possibile fare overriding quindi vorrei che l’implementazione del metodo eseguita fosse quella ridefinita nel figlio se ho un istanza del figlio</p>
+<p>Se al posto del padre trovo un figlio e chiamo un metodo del padre ridefinito dal figlio vorrei che venga richiamata l’implementazione nuova del figlio</p>
+<p>Devo aspettare il runtime -&gt; è dinamico (non statico)</p>
+<p>Chiama l’implementazione più vicina alla classe realmente presente lì</p>
+<p>Permette di chiamare del codice che non è ancora stato scritto. E’ molto flessibile è mantenibile infatti</p>
+<h1 id="come-uso-i-concetti-delloo">Come uso i concetti dell’OO</h1>
+<h2 id="principio-di-sostituzione-di-liskov">Principio di sostituzione di Liskov</h2>
+<p>prima regola dell’OO è quella di non cancellare i metodi. I figli devono saper fare tutto quello che sa fare il padre, niente di meno; poi possono fare anche cose in più. Non posso togliere conoscenze.</p>
+<blockquote>
+<p>Sia q(x) una proprietà provabile da oggetti di tipo T. Allora q(y) deve essere vero per oggetti di tipo y di tipo S se S è sottotipo di S.</p>
+</blockquote>
+<p>i sottotipi devono soddisfare tutte le proprietà che rispettano i padri, altrimenti non sono sottotipi. Se non fosse così non potrei fare collegamneto dinamico: non potrei mettere il figlio al poisto del padre</p>
+<h2 id="design-by-contract">Design by contract</h2>
+<p>Meier ragione su pre e post condizini di un metodo. Faccio un contratto con il metodo. Se tu mi invochi allora mi prometti che ci sono delle determinate precondizioni, s ele precondizioni sono vere il metodo mi assicura che fa tutto quello che promette. Se non sono vere le precondizione allora il metodo può fare ciò che vuole.</p>
+<p>Se il metodo lo eredito da una classe figlia e lo ridefinisco allora la mia ridefinizione deve funzionare ancora quando funzionava l aprecedente definizione:</p>
+<ul>
+<li>precondizioni devono essere uguali o più ampie</li>
+</ul>
+<p>le post condizioni devono fare la stessa cosa di prima o più precisa</p>
+<ul>
+<li>postcondizione uguali o più strette</li>
+</ul>
+<p>Eifel (linguaggio di Meier) controllava con la sintassi se veniva rispettata questa cosa e quindi se rispetta il principio della Liskov.</p>
+<h1 id="associazioni">Associazioni</h1>
+<p>LA seconda delle relazioni che vediamo; ci sono diverse relazioni (generalizzazione, associazioni…)</p>
+<p>è una relazione tra istanze di classi, non tra classi -&gt; != generalizzazione</p>
+<p>un istanza deve riconoscere e ricordare un altra istanza. Studenti sono in relazione con bellettini, non con tutto il genere dei professore. Siamo associati con un istanza e non con una clsse</p>
+<p>Implica una relazione usa. Devo tenere traccia di un altra istanza perchè devo usare le sue funzioni</p>
+<p>Quando due oggetti interagiscono vuol dire che c’è una relazione</p>
+<p>Un associazione è la più smeplice tra tutte <strong>In UML:</strong></p>
+<blockquote>
+<p>la indico come una linea semplice, con:</p>
+<blockquote>
+<p><strong>label</strong>: nome della relazione (Es: segue_corso_di)</p>
+</blockquote>
+<blockquote>
+<p><strong>ruolo</strong>: è utile quando sono associazioni tra due classi uguali. Lo useremo per dare dei nomi agli attributi</p>
+</blockquote>
+<blockquote>
+<p><strong>moltiplicità</strong>: indica quante istanze di una sono in relazione con con quante istanze dell’altra e viceversa. La molteplicità lontana alla classe si riferisce a quella classe lontana.</p>
+</blockquote>
+</blockquote>
+<h2 id="navigabilità-associazioni">Navigabilità associazioni</h2>
+<p>delle associazioni non sempre sono a doppio senso. Spesso una istanza deve conoscere l’istanza dell’altra ma può non essere necessario il viceversa.</p>
+<p>ES:_ il professore non sa le istanze singole dei suoi studenti.</p>
+<p>Qundo progetto devo decidere quali istanze devo memorizzare</p>
+<blockquote>
+<p>la linea senza nulla è una associazione bidirezionale</p>
+</blockquote>
+<blockquote>
+<p>se ho una freccia non piena (-&gt;) invece le istanze sono in associazione ma quella che punta deve conoscere e ricordare quella puntata, ma quella puntata non deve ricordare chi la punta anche se è in relazione con lei.</p>
+</blockquote>
+<h2 id="associazioni-e-attributi">Associazioni e attributi</h2>
+<p>spesso l’associazione si fa attraverso la definizione di un attributo, ma non è l’unico modo.</p>
+<p>Non mi costringe ad usare un attributo. Posso anche farlo in maniera diversa.</p>
+<p><strong>VICEVERSA</strong> non è vero che ogni volta che ho un attributo in cui ho un associazione</p>
+<p>Con gli attributi posso fare anche aggregazione e composizione che sono casi particolari di associazioni.</p>
+<p>Non è perforza necessario separare associzione da aagregazione, composizione ecc.. potrei all’inizio mettere solo associazioni e poi in secondo luogo precisare che tipo di associazione.</p>
+<h3 id="errore">Errore</h3>
+<p>non va segnato in UML sia l’attributo che l’associazione perchè sto ripetendo due volte la stessa cosa. Se metto solo l’attributo o solo l’associazione ottengo lo stesso effetto. Se metto solo la freccia della associazione posso fare quello che voglio per realizzarla, se metto solo l’attributo obbligo a creare un associazione con un attributo.</p>
+<h3 id="prossima-lezione."><a href="./2018-7-28.pdf">Prossima Lezione. &gt;</a></h3>
+<hr />
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>Object Orientation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Object Orientation</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">28 marzo 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#quali-classi">Quali classi?</a><ul>
+<li><a href="#crc-card">CRC card</a></li>
+<li><a href="#carte">Carte</a></li>
+</ul></li>
+<li><a href="#pattern">Pattern</a><ul>
+<li><a href="#anti-pattern">Anti Pattern</a></li>
+<li><a href="#idioma">Idioma</a></li>
+<li><a href="#quali-sono-i-pattern">Quali sono i pattern</a></li>
+<li><a href="#meta-pattern">Meta Pattern</a><ul>
+<li><a href="#hook-method">Hook Method</a></li>
+<li><a href="#template-method">Template Method</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#pattern-gang-of-four">Pattern Gang of Four</a></li>
+<li><a href="#observer-comportamentale">Observer [COMPORTAMENTALE]</a><ul>
+<li><a href="#polling">Polling</a></li>
+<li><a href="#interrupt">Interrupt</a></li>
+<li><a href="#scenario-duso">Scenario d’uso</a></li>
+<li><a href="#template">Template</a></li>
+<li><a href="#hook">Hook</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr />
+<p>(lez 9 - seconda parte)</p>
+<h1 id="quali-classi">Quali classi?</h1>
+<ul>
+<li>Entity: i veri e propri oggetti che caratterizzano il dominio applicativo.</li>
+<li>Controllo : gestiscono gli eventi</li>
+<li>Boundary: rappresentano l’interfaccia</li>
+</ul>
+<p>Un altro modo per classificare le classi, non proprio dell’informatica:</p>
+<ul>
+<li>concetti</li>
+<li>cose reali</li>
+<li>ruoli e persone</li>
+<li>eventi</li>
+<li>organizzazioni</li>
+<li>posti</li>
+</ul>
+<p>sono cose molto diverse tra loro.</p>
+<p>Posso usarle come punto di partenza per scoprire le classi. Ma dovrei richiedere al cliente la cosa. Posso usarlo invece come controlllo. Per vedere se le cose importanti le ho già scritte come classi. Tenendo presente che non deov per forza rappresentare tutte le cose reali. Non mi serve avere l’oggetto della mamma del dipendente, oppure non voglio tutte le info di una bibliotecaria se faccio un sistema per biblioteche. Non mi serve sapere la sua data di nascita ad esempio.</p>
+<h2 id="crc-card">CRC card</h2>
+<p>http://c2.com/doc/oopsla89/paper.html</p>
+<p>http://www.softstar-inc.com/Download/Intro%20to%20CRC.pdf</p>
+<p>più che per identificare le classi è uile per ragionare sulle dipendenze, gli attributi ecc. sulle classi che ho già trovato. Quando poi faccio il gioco, posso trovare delle cose che mi servono in più sulle dipendenze fra le varie classi e capisco cosa le caratterizza. O i metodi che mi aiutano anche a capire come devono interagire le varie classi.</p>
+<h2 id="carte">Carte</h2>
+<p>ogni classe ha una carta. Con scritte:</p>
+<ul>
+<li>Responsabilities</li>
+<li>Collaboration</li>
+</ul>
+<p>ogni persona prende una carta e si inizia a dialogare. “Io ho bisogno di questo servizio….Io posso darlo…. ecc”</p>
+<p>Capisco quali sono le <strong>responsabilità</strong> che ha la mia classe verso le altre classi: le info che la mia classe si deve memorizzare.</p>
+<p>E capisco qualio sono le <strong>collaborazioni</strong> che devo instaurare tra le varie classi e quindi i metodi che devo implementare.</p>
+<h1 id="pattern">Pattern</h1>
+<p>può aiutare nella fase di modellazione per la decisione delle classi. So già quali classi mi servono per risolvererb il problema.</p>
+<blockquote>
+<p>Pattern = soluzioni di problemi ricorrenti ripetibili</p>
+</blockquote>
+<p>sono la soluzioni di problemi molto generici che potrebbero capitare a chiunque.</p>
+<h2 id="anti-pattern">Anti Pattern</h2>
+<p>sono le cattive soluzioni ma che sembrano molto ragionevoli. Apparentemente la soluzione sembra essere la migliore ma più si va avanti diventa un’idea pessima, ne rimango invischiato. L’antipattern mi dice: attento che in questa situazione anche se sembra la soluzione più ovvia, guarda che in realtà fa schifo.</p>
+<h2 id="idioma">Idioma</h2>
+<p>i pattern sono delle soluzioni di come costruisco e modello la mia soluzione ed esula dal linguaggio di programmazione. L’idioma è l’implementazione del pattern per un determinato linguaggio. Viene specificato perchè magari un deteeminato linguaggio ha un costrutto perfetto per quello che altri non hanno, quindi l’idioma mi consiglia che per quel patter in quel linguaggio si può usare un particolare costrutto di quel linguaggio.</p>
+<h2 id="quali-sono-i-pattern">Quali sono i pattern</h2>
+<p>Pattern devono essere scritti in maniera chiara. Sono stati decisi che i più importanti sono i 23 della Gang of Four. Che furono i primi a sviluppare dei pattern che usavano per risolvere problemi di grafica, ma che erano tanto generali che andavano bene anche per altre cose.</p>
+<h2 id="meta-pattern">Meta Pattern</h2>
+<p>astraggo i pattern e guardo cosa sono le componenti principali dei pattern</p>
+<h3 id="hook-method">Hook Method</h3>
+<p>metodo astratto che customizza e rende proprio del mio dominio applicativo il pattern. Scrivo un templete con alcuni punti modificabili così che io possa modificarli e metterci cose del mio dominio applicativo per applicare il pattern alle mie esigenze. Hook sono delle parti di codice non ancora scritte ma che il template già richima. Per questo deve essere astratto: uso del codice che non è ancora stato scritto. Chiamo quel codice anche se nessuno lo ha mai scritto. L’unicino è il riferimento a quella cosa e lo uso come se fosse veramente implementato, quando in realtà viene implementato solamente quando applico il pattern al mio dominio applicativo.</p>
+<p>Parte calda = la parte di codice che viene modificata per poter applicare il pattern al mio dominio.</p>
+<h3 id="template-method">Template Method</h3>
+<p>il template invece è il codice che usa gli hook e non viene modificato qunaod voglio usare il pattern. E’ tutto ciò che non è hook ma che ingloba gli hook.</p>
+<p>Parte fredda = non viene mai modificato quando applico il pattern.</p>
+<h4 id="relazione-hook-template">Relazione hook template</h4>
+<ul>
+<li>Unification: nella stessa classe ho hook e template</li>
+<li>Separation: ho due classe separate, hook class e template class e nenache relazionate fra loro</li>
+<li>Connection: sono in classi separate ma sono tra loro in relazione.</li>
+</ul>
+<h1 id="pattern-gang-of-four">Pattern Gang of Four</h1>
+<p>sono 23 pattern separati in:</p>
+<ul>
+<li>Creazionali: per costruire oggetti</li>
+<li>Comportamentali: interazioni tra oggetti</li>
+<li>Strutturali: composizione di classi di oggetti</li>
+</ul>
+<h1 id="observer-comportamentale">Observer [COMPORTAMENTALE]</h1>
+<p>è un pattern molto usato. Fa parte anche di pattern più complessi (devo sempre considerare le relazioni con gli altri pattern).</p>
+<p>Quando ho motle classi che devono reagire al cambiamento di stato di un unica classe. Ho un osservato e molti osservatori. Però con una minima conoscenza gli uni degli altri. Non voglio che l’aggiunta di un osservatore o la modifica di un osservatore mi debba costringere a cambiare enormemente l’osservato. Voglio inolre un legame <strong>dinamico</strong>. non definisco chi osserva chi, ma in fase di esecuzione posso modificar chi osserva chi.</p>
+<h3 id="polling">Polling</h3>
+<p>l’osservatore ogni tanto richiede all’osservato informazioni e verifica se ha cambiato o meno il suo stato. Il problema però è che ho una perdita di performance e in più tutti gli osservatori continuerebbero a chiedere all’osservato e l’osservatore impazzisce.</p>
+<h3 id="interrupt">Interrupt</h3>
+<p>Faccio il contrario allora. Il soggetto comunica che è cambito qualcosa. Chiede a chi è interessato al suo stato di registrarsi. Che è registrato riceve la notifica che lo stato è cambiato solamente quando cambia lo stato.</p>
+<p>E’ comportamentale perche a fronte di un cambiamento di stato mi determina cosa fare.</p>
+<ul>
+<li>Template = <strong>subject</strong>: rifà sempre le stesse cose e avverte gli observer che è cambiato lo stato</li>
+<li>Hook = <strong>update</strong>: è cosa deve succedere quando cambia lo stato.</li>
+</ul>
+<p>Update è l’uncino al quale il subject si può aggangiare per dirgli ora fai quello che ti serve. Il subject richiama l’update ogni volta che cambia lo stato, ma quello che deve fare l’update non è definito e deve essere specificato dall’utente</p>
+<p>Update e Subject sono in due classi <strong>separate</strong> collegate con un aggregazione. Aggregazione perchè ci deve essere qualcuno che l’osserva se no non sarebbe un osservato. Ce ne deve essere almeno 1. Se tra subjecg e Observer ho 1-1 vuol dire che quando nasce un Observer allora osserva già qualcosa (osserva sempre qualcosa per tutta la vita). Se metto 0-1 invece posso crearlo indipendentemente da un osservato. Se scelgo uno o l’altro cambia il modo in cui faccio il costruttore(se 1-1 passo l’osservato che dovrà osservare per tutta la vita quando lo creo)</p>
+<p>NAvigabilità è da interfacci asubject a interfaccia observer (Subject conosce l’observer mentre l’obeserver non conosce il subject). Quindi se dico che sono collegati dcon cardinalità 1-1 vuol dire che nel costruttore gli passo un subject sul quale lui si registra (ma non si ricorda a quale subject). Fin dalla sua nascita lo registro a quel subject.</p>
+<p>Ho un’aggregazione fra interfacce ma l’interfaccia non può avere attributi. Lo faccio però perchè:</p>
+<ul>
+<li>posso non realizzare l’aggregazione come un attributo</li>
+<li>l’interfaccia è come un contratto con dei metodi da implementare. Così le classi che implementano l’interfaccia dovranno anche implementare questa relazione (lo faccio diventare parte del contratto.)</li>
+<li>con un interfaccia posso creare più tipologie di osservati che comunque sarebbero compatibili con gli osservatori perchè la aggregazione è sull’interfaccia. <strong>dipendo solo dalle cose astratte</strong> (dependecy inversion)</li>
+</ul>
+<p><code>ConcreteSubject</code> e <code>ConcreteObserver</code> sono le due classi che implementano le interfacce.</p>
+<h2 id="scenario-duso">Scenario d’uso</h2>
+<p>ho una centralina metereologica con sensori di:</p>
+<ul>
+<li>temperatura</li>
+<li>umidità</li>
+<li>pressione</li>
+</ul>
+<p>la centralina esporta un interfaccia software. Ho vari terminali che usando i dati dei tre sensori mi danno info diverse:</p>
+<ul>
+<li>le previsioni del tempo</li>
+<li>storico</li>
+<li>….</li>
+</ul>
+<p>Oppure potrei avere dei telefonini che mi prendono le info con un app.</p>
+<p>Ho quindi un osservato e un numero indefinito di observer.</p>
+<h2 id="template">Template</h2>
+<ul>
+<li><code>registerObserver()</code></li>
+<li><code>removeObserver()</code></li>
+<li><code>notifyObserver()</code></li>
+</ul>
+<p>essendo l aparte fredda non hanno a che fare con la mia implementazione. Saranno sempre uguali per ogni pattern</p>
+<h2 id="hook">Hook</h2>
+<p>2 modalità per fare <code>update</code>:</p>
+<ul>
+<li>modalità <strong>PUSH</strong>: l’osservatore riceve contemporaneamente notifica e aggiornamento. Ti notifico che è cambiato lo stato e te lo passo. Va bene solo se il tempo di trasmissione dello stato è gestibile enon troppo lungo (se sono 5GB anche no)</li>
+<li>modalità <strong>PULL</strong>: ti dico solo che è cambiato lo stato e poi sei tu che ti vieni a prendere solo le info dello stato che ti serve e non tutto lo stato.</li>
+</ul>
+<p>a volte si fa ibrido: ti passo un info che serve sempre e poi tu ti puoi andare a prendere anche altro. Così evito che tutti vengano a chiedere le cose che potrei passarli.</p>
+<p>Volgio che il pattern siano generici. Quindi le classi devono essere generiche. Non devono sapere nulla di quelle concrete. Nulla di come è fatto lo stato.</p>
+</body>
+</html>
