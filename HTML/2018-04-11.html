@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>UML</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">UML</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">11 aprile 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#facciamo-un-punto-sulluml-fatto-finora">Facciamo un punto sull’UML fatto fin’ora</a><ul>
+<li><a href="#viste-dinamiche">Viste dinamiche</a></li>
+</ul></li>
+<li><a href="#object-diagram">Object Diagram</a></li>
+<li><a href="#user-stories">User stories</a></li>
+<li><a href="#use-case">Use case</a><ul>
+<li><a href="#associazioni">Associazioni</a><ul>
+<li><a href="#tra-use-case">Tra Use Case</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#sequence-diagram">Sequence Diagram</a><ul>
+<li><a href="#elementi">Elementi</a></li>
+<li><a href="#lifeline">Lifeline</a></li>
+<li><a href="#messaggi">Messaggi</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr />
+<h1 id="facciamo-un-punto-sulluml-fatto-finora">Facciamo un punto sull’UML fatto fin’ora</h1>
+<p>abbiamo visto solo il diagramma delle classi, ora vediamo l’<strong>object diagram</strong></p>
+<h2 id="viste-dinamiche">Viste dinamiche</h2>
+<ul>
+<li>Use cases ==&gt;</li>
+<li>interaction diagram ==&gt; specificano le interazioni fra oggetti</li>
+<li>State diagram ==&gt;</li>
+<li>Activity Diagram ==&gt; ..nascono per definire attività che possono essere svolte in parallelo. Possono essere delle cose molto generali</li>
+</ul>
+<p>i diagrammi UML più importanti sono Class, State e Sequence</p>
+<h1 id="object-diagram">Object Diagram</h1>
+<p>Ogni box del diagramma rappresenta una singola istanza e non un intera classe.</p>
+<p>Sto facendo una foto di un <strong>determinato momento</strong>, il class diagram invece era più astratto, rappresentava una situzione generale e non un preciso istante.</p>
+<p>Qui prendo un solo istante di tempo.</p>
+<p><strong>in UML</strong>:</p>
+<blockquote>
+<p>sono delle scatole con</p>
+</blockquote>
+<p>è una vista dinamica (a runtime), ma statica ==&gt; una <strong>foto</strong></p>
+<h1 id="user-stories">User stories</h1>
+<p>è un diagramma dinamico che evolve con il tempo</p>
+<p>…</p>
+<p>non aiutano a ragionare ad oggetti</p>
+<h1 id="use-case">Use case</h1>
+<p>è il diagramma di UML per indicarle.</p>
+<p>Attori =</p>
+<h2 id="associazioni">Associazioni</h2>
+<p>esistono degli attori primari, sono quelli per i quali viene fatta la funzionalità</p>
+<h3 id="tra-use-case">Tra Use Case</h3>
+<h4 id="include">Include</h4>
+<h4 id="extend">Extend</h4>
+<h1 id="sequence-diagram">Sequence Diagram</h1>
+<p>ci sono dei casi in cui è meglio usare il Concept diagram , ma è molto più esaustivo il sequence diagram</p>
+<p>…</p>
+<p>Essendo un diagramma dinamico mi esprime anche il tempo in cui avvengono le cose. Non nasce per dire quanto tempo avenza ma per dire cosa viene prima di cosa. ==&gt; Non si usa per sistemi realtime</p>
+<h2 id="elementi">Elementi</h2>
+<ul>
+<li><p>Attori</p></li>
+<li><p>Oggetti (istanze)</p></li>
+</ul>
+<h2 id="lifeline">Lifeline</h2>
+<p>rappresento gli oggeti quando un certo oggeto è effetivamente rappresentato in memoria</p>
+<p>Un oggetto può avere diversi stati:</p>
+<ul>
+<li>Esiste <code>linea tratteggiata-----</code></li>
+<li>Non esiste <code>linea continuna ________</code></li>
+<li>è attivo <code>linea come box</code></li>
+</ul>
+<p>Per <strong>attivo</strong> si intende … se c’è qualcosa del suo stato nello stack di attivazione….</p>
+<h2 id="messaggi">Messaggi</h2>
+<p>sono istanze delle associazioni</p>
+<blockquote>
+<p>possono essere di diverso tipo:</p>
+<ul>
+<li>Call</li>
+<li>Return</li>
+<li>Asincrono</li>
+</ul>
+</blockquote>
+<hr />
+</body>
+</html>

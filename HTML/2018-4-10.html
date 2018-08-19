@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gabriele Zarcone" />
+  <title>Patterns</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/Users/gabriele/Programmi/CSS/BLU.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Patterns</h1>
+<p class="author">Gabriele Zarcone</p>
+<p class="date">10 aprile 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#singleton">Singleton</a><ul>
+<li><a href="#oggetto">Oggetto</a></li>
+<li><a href="#in-java">in java</a></li>
+<li><a href="#getinstance">getInstance()</a></li>
+<li><a href="#codice">Codice</a></li>
+<li><a href="#pattern-double-check">Pattern Double Check</a></li>
+</ul></li>
+<li><a href="#idioma-singleton-java">Idioma Singleton Java</a><ul>
+<li><a href="#classe-completamente-statica">Classe completamente Statica</a><ul>
+<li><a href="#osservazioni">Osservazioni</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#composite-strutturale">Composite {strutturale}</a><ul>
+<li><a href="#parti-e-gruppo">Parti e gruppo</a><ul>
+<li><a href="#soluzione">Soluzione</a></li>
+</ul></li>
+<li><a href="#osservazioni-sul-composite">Osservazioni sul Composite</a></li>
+</ul></li>
+<li><a href="#state">State</a><ul>
+<li><a href="#automa-a-stati-finiti">Automa a stati finiti</a></li>
+<li><a href="#state-in-together">State in Together</a></li>
+<li><a href="#partecipanti">Partecipanti</a><ul>
+<li><a href="#context">Context</a></li>
+<li><a href="#state-1">State</a></li>
+<li><a href="#contextstsate">ContextStsate</a></li>
+</ul></li>
+<li><a href="#osservazioni-1">Osservazioni</a></li>
+<li><a href="#gun-ball-machine">Gun Ball Machine</a><ul>
+<li><a href="#codice-1">Codice</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#flyweight">Flyweight</a></li>
+<li><a href="#command-comportamentale">Command {comportamentale}</a></li>
+</ul>
+</nav>
+<hr />
+<h1 id="singleton">Singleton</h1>
+<p>è spesso considerato come una cosa negativo, ci sono addirittura dei tool che ti aiutano a riconoscerlo per sostituirlo. Perchè lo si usava come si usano delle variabiloi globali che è una cosa negativa, perchè non sai più chi li sta toccando quei dati e se qualcosa non funziona devi andare a riguardarti tutto</p>
+<h2 id="oggetto">Oggetto</h2>
+<p>un oggetto ha:</p>
+<ul>
+<li>uno Stato</li>
+<li>un Comportamento</li>
+</ul>
+<p>C’è anche però un concetto di <strong>identità</strong>:</p>
+<p>Due oggetti dovrebbero essere entità distinte anche se tutti i loro campi hanno valori identici</p>
+<h2 id="in-java">in java</h2>
+<p>JAva non ci dà un oggetto di questo tipo, ci da delle copie di un oggetto, e noi non vogliamo. Ce ne deve essere solo uno.</p>
+<p>Questa cosa la facciamo con il Singleton</p>
+<p>Quindi se voglio che ci sia solo uno oggeto di quel tipo =&gt; rendo il <strong>COSTRUTTORE</strong> <code>privato</code></p>
+<p>L’oggeto viene quindi creato da oggetti della classe stessa, però per farlo dovrebbe già esserci un oggetto di quel tipo (circo.o vizioso)</p>
+<h2 id="getinstance">getInstance()</h2>
+<p>Quindi sarà un <strong>metodo statico</strong> a farlo perchè posso usarlo anche senza aver creato un oggetto di quel tipo</p>
+<p>Alla prima invocazione mifa una new, alle successive no ==&gt; crea un oggetto solo</p>
+<p>è un metodo statico che restituisce un tipo Singleton</p>
+<h2 id="codice">Codice</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Singleton{</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="kw">protected</span> <span class="fu">Singleton</span>(){}</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="kw">private</span> <span class="dt">static</span> Singleton instance = <span class="kw">null</span>;</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="kw">public</span> <span class="dt">static</span> Singleton <span class="fu">getInstance</span>(){</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">        <span class="kw">if</span>(instance == <span class="kw">null</span>){</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">            instance = <span class="kw">new</span> <span class="fu">Singleton</span>();</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">        }</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">        <span class="kw">return</span> instance;</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    }</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">}</a></code></pre></div>
+<p>è però un codice sbagliato se siamo in ambiente concorrente. Se ho due thread che vogliono concorrentamnte accedere al metodo <code>getInstance()</code> è possibile che il primo processo venga interrotto subito dopo aver controllato se instance è <code>null</code>, quindi non fa il <code>new</code>. Se il secondo processo va in esecuzione e controlla <code>intance==null</code> lo trova falso e fa lui la <code>new</code>. Quando il primo ritorna in esecuzione ha già controllato l’if e fa anche lui la <code>new</code>. E assengna nella stessa variabile l’oggetto che aveva già assegnato all’altro processo.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Singleton {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">      <span class="kw">protected</span> <span class="fu">Singleton</span>() {}</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">      <span class="kw">private</span> <span class="dt">static</span> Singleton instance = <span class="kw">null</span>;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">      <span class="kw">public</span> <span class="kw">synchronized</span> <span class="dt">static</span> Singleton <span class="fu">getInstance</span>(){</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">         <span class="kw">if</span> (instance == <span class="kw">null</span>) {</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">            instance = <span class="kw">new</span> <span class="fu">Singleton</span>();</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">         }</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">         <span class="kw">return</span> instance;</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">      }</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">}</a></code></pre></div>
+<p>Aggiungo un <code>syncronized</code>………</p>
+<p>Diventa però una soluzione molto inefficente se il <code>getInstance</code> viene chiamato tante volte.</p>
+<h2 id="pattern-double-check">Pattern Double Check</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"> <span class="kw">public</span> <span class="kw">class</span> Singleton {</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">      <span class="kw">protected</span> <span class="fu">Singleton</span>() {}</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">      <span class="kw">private</span> <span class="dt">static</span> Singleton instance = <span class="kw">null</span>;</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">      <span class="kw">public</span> <span class="dt">static</span> Singleton <span class="fu">getInstance</span>(){</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">         <span class="kw">if</span> (instance == <span class="kw">null</span>) {</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">           <span class="kw">synchronized</span>(Singleton.<span class="fu">class</span>) {</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">              <span class="kw">if</span> (instance == <span class="kw">null</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                instance = <span class="kw">new</span> <span class="fu">Singleton</span>();</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">           }</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">         <span class="kw">return</span> instance;</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">      }</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">}</a></code></pre></div>
+<p>…….</p>
+<p>per tutte le volte che</p>
+<p>nel caso in cui l’oggetto esiste di già: sono tornato alla efficenza iniziale perchè non entra neanche nel metodo</p>
+<p>s einvece non esiste di già: ……….</p>
+<p>idea del double check: una volta che mi chiedo se posso entrare poi me lo richiedo (?)</p>
+<p>……..</p>
+<p>ho comunque un problema perchè un processo che entra e mi fa cambiare l’istance a null potrebbe però essere stoppato prima di inizializzare il Singleton ==&gt; lavorerebbe su un oggetto che non esiste.</p>
+<p>Bisogna pensare che potrebbe essere interrotta in qualunque punto, anche a metà di istruzioni complesse.</p>
+<p>il double check è comunque la soluzione più accettata di tutte</p>
+<h1 id="idioma-singleton-java">Idioma Singleton Java</h1>
+<p>si può fare usando gli <strong>ENUMERATIVI</strong></p>
+<p>PERCHè IN JAVA un enumerativo è una classe con un costruttore privato che viene instanziato solo la prima volta.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">public</span> <span class="kw">enum</span> MySingleton {</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">          INSTANCE;</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">          <span class="kw">public</span> <span class="fu">sampleOp</span>() {...}</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">      }</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">      MySingleton.<span class="fu">INSTANCE</span>.<span class="fu">sampleOp</span>();</a></code></pre></div>
+<p>Quando viene creato <code>ISTANCE</code> chiama il costruttore privato e crea quella sua unica istanza!</p>
+<p>E funziona anche in <em>ambiente concorrente</em></p>
+<h2 id="classe-completamente-statica">Classe completamente Statica</h2>
+<p>Un altro metodo ancora pe farlo è creare tutto statico, non faccio nenache il costruttore. Dato che un singolo oggetto non ho bisogno di costruttore. Così però ho una classe che fa finta di essere un oggetto, non ho tutti i benefici di ereditarietà, polimorfismo e collegamneto dinamico. <em>Non posso specializzare il mio oggetto Singleton</em> ==&gt; non posso farne sottoclassi.</p>
+<h3 id="osservazioni">Osservazioni</h3>
+<ul>
+<li><p>è meno flessibile</p></li>
+<li><p>non posso ereditare dalla classe singleton e sfruttare collegamento dinamico</p></li>
+<li><p>non posso fissae un numero di istanze: basta cambiare <code>getInstance()</code> in modo che si blocchi dopo 5 creazioni e non dopo una. Se ho <code>getInstance()</code> posso implementarlo con tutta la logica che voglio. [questo è uno svantaggio anche dell’implementazione con <em>enumerativi</em>]</p></li>
+</ul>
+<h1 id="composite-strutturale">Composite {strutturale}</h1>
+<p>/////IMMAGINE</p>
+<p>è simile come architettura al decorator, ma il suo scopo e utilizzo è diverso</p>
+<p>è simile perchè ho delle classi concrete, una astratta e c’è un doppio legame: la classe astratta aggrega e implementa la stessa cosa (come il decorator).</p>
+<p>Dal decorator cambia la cardinalità.</p>
+<blockquote>
+<p>Metto insieme un gruppo di oggetti e voglio che tutti questi oggetti siano visti come un oggetto unico ==&gt; serve per <strong>raggruppare oggetti</strong></p>
+</blockquote>
+<p>Come su photoshop quando raggruppo più linee e cambio a tutti lo spessore</p>
+<p>Utile se voglio cambiare la stessa cosa su tanti oggetti. Non voglio selezionare ogni volta tutti gli oggetti per cambiare la stessa cosa.</p>
+<p>In più posso raggruppare anche dei gruppi, per questo c’è il doppio legame.</p>
+<h2 id="parti-e-gruppo">Parti e gruppo</h2>
+<p>Gestisce delle strutture ad albero per rappresentare gerarchie di parti e insiemi uniformemente, senza accorgermi che ci sia differenza tra foglia e nodo. Posso chiamare un metodo indifferentemente che sia su una foglia o su un nodo. (?) Senza accorgermi se è una parte o un gruppo</p>
+<p>Ci sono dei metodi però che hanno senso solo per il gruppo però e non pe rla parte =&gt; ho un problema se non voglio che il programmatore se ne accorga.</p>
+<h3 id="soluzione">Soluzione</h3>
+<p>ho più soluzioni:</p>
+<ol type="1">
+<li><p>se su una parte chiamo un metodo che può essere fatto da un gruppo allora chiamano un ecezione e poi io gestisco l’eccezione. Non violo Liskov perchè già nell’interfaccia non sapevo farlo, poi l’oggetto figlio richiama un eccezione che comunque fa qualcosa in più.</p></li>
+<li><p>metto tutti i metodi dei gruppi solo nel gruppo …… ??</p></li>
+<li>metto un metodo <code>getComposite</code> nell’interfaccia che ritorna un composito(gruppo). in modo da controllare se sono in un gruppo o in una parte. Implemnto <code>getComposite</code> sia nelle parti che nei gruppi
+<ul>
+<li>nei gruppi ho <code>return this</code></li>
+<li>nelle parti ho un <code>return null</code></li>
+</ul></li>
+</ol>
+<h2 id="osservazioni-sul-composite">Osservazioni sul Composite</h2>
+<ul>
+<li><p>Il cliente interagisce esclusivamente tramite l’interfaccia Component</p>
+<ul>
+<li>Risulta semplice perché non si deve preoccupare se sta interagendo con elemento singolo o composito</li>
+</ul></li>
+<li><p>Minore possibilità di controllo su che tipo di oggetti possono essere dentro a particolari Composite</p></li>
+</ul>
+<p>(?) posso scegliere di mettere funzioni gestione….</p>
+<h1 id="state">State</h1>
+<blockquote>
+<p>permette di modellare cambiamentti di comportametno al cambiare dello stato dell’oggetto</p>
+</blockquote>
+<p>il modo più sbagliato per implmentare quata cosa è lo `switch. viene fuori una classe lunghissima e tutti i metodi devono implementare tutti i casi dello switch. E quando implementi una cosa nuova devi cambiare tutti i metodi e gli switch.</p>
+<p>/////IMMAGINE</p>
+<p>Ho un Controller con i suoi metodi che è la mia classe principale</p>
+<p>I metodi che devono cambiare al cambiamento dello stato della classe li porto fuori dalla classe in una classe <em>Tool</em>, così che se devo cambiarli non devo cambiare la classe stessa.</p>
+<p>Metto un <em>aggrgazione</em> tra le due classi</p>
+<p>Il Tool non sa a chi è collegato ma ogni volta che chiamo uno dei suoi metodi gli devo dire chi è il controller. Allegerisco la classe appesantendo la comunicazione.</p>
+<p>Tutti i case dello switch di prima diventano diversi metodi di una unica classe Tool. i diversi tool poi saranno delle sottoclassi della intrerfaccia tool e ogni tool diverso implemmnta la sua reazione ad un dato stato che è cambiato.</p>
+<p>Se voglio aggiungere un nouovo toool devo solo aggiungere una nuova sottoclasse. Non devo modificare le esistenti ma solo aggiungere roba ==&gt; Open Close Principle</p>
+<h2 id="automa-a-stati-finiti">Automa a stati finiti</h2>
+<p>nel senso: sono in questo stato allora succede questo.</p>
+<p>(?) E’ come un automa a stati finiti. Ci sono delle transizioni di stato da tenere in conto.</p>
+<ul>
+<li>a volte è lo stato che …….</li>
+</ul>
+<p>devo avere una minima conoscenza degli altri perchè devo poter cambiare lo stato anche degli altri (?)</p>
+<h2 id="state-in-together">State in Together</h2>
+<p>(?)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"></code></pre></div>
+<h2 id="partecipanti">Partecipanti</h2>
+<h3 id="context">Context</h3>
+<p>è l’unica parte che ha che fare con il cliente</p>
+<ul>
+<li>quello che ha a che fare con lo stato lo rimappa a qualcos’altro</li>
+<li>mantiene un’istanza della classe state</li>
+</ul>
+<h3 id="state-1">State</h3>
+<p>(?)</p>
+<h3 id="contextstsate">ContextStsate</h3>
+<p>(?)</p>
+<h2 id="osservazioni-1">Osservazioni</h2>
+<ul>
+<li><p>Viene partizionato il comportamento nelle varie classi stato</p></li>
+<li><p>Viene reso esplicito (e atomico) il passaggio di stato</p></li>
+<li><p>Gli oggetti stato possono essere in alcuni casi condivisi (vd. Pattern flyweight)</p></li>
+</ul>
+<h2 id="gun-ball-machine">Gun Ball Machine</h2>
+<ul>
+<li><p>Parto da <code>noQuarter</code> stato in cui nn c’è la monetina dal quarto di dollaro</p></li>
+<li><p>posso o riprendemi la moneta o girare la manopola</p></li>
+<li>se la giro posso ritrovarmi in due stati:
+<ul>
+<li>sono finite le palline</li>
+<li>ci sono altre palline ==&gt; ritorno a <code>noQuarter</code></li>
+</ul></li>
+</ul>
+<p>Le frecce che ci sono però sono cose che il cliente potrebbe fare anche quando non ci sono le condizioni per farlo (es inserire la monetina quando ce n’è già una). Sono i miei eventi</p>
+<ul>
+<li>Frecce = cambiamento di stato</li>
+<li>etichetta freccia = vento</li>
+</ul>
+<p>Se mantengo nella mia impkementazione i concetti di <strong>evento</strong> <strong>traniszione</strong> e <strong>stato</strong> se poi devo implementare nuovi stati posso farlo, altrimenti diventa difficile.</p>
+<h3 id="codice-1">Codice</h3>
+<h4 id="brutto">Brutto</h4>
+<p>senza usare il pattern State</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb6-1" data-line-number="1"> <span class="kw">public</span> <span class="kw">class</span> GumballMachine { ???????????&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  </a></code></pre></div>
+<h1 id="flyweight">Flyweight</h1>
+<blockquote>
+<p>uqnado una classe può essere usato pee creare altre istanze virtuali</p>
+</blockquote>
+<p><em>es</em> software di disegno ho l’oggetto albero che è un cerchio la cui raggio dipende dalla età dell’albero.</p>
+<p>ho un sacco di istanze virtulali di un unica istanza che possono essere</p>
+<h1 id="command-comportamentale">Command {comportamentale}</h1>
+<p>è comportamentale e infatti il diagramma degli stati ci darà poche info inizialmente</p>
+<blockquote>
+<p>è l’equivalente delle <code>callback</code> nell’OO</p>
+<p>quando ho bisogno di scollegare ciò che viene chiamato e ciò che chiamiamo. Quando ho una lista di chiamate.</p>
+</blockquote>
+<hr />
+</body>
+</html>

@@ -1,9 +1,6 @@
----
-author: Gabriele Zarcone
-date: 8 maggio 2018
-title: Design Pattern
----
----------------------------------------------
+% Design Pattern
+% Gabriele Zarcone
+% 8 maggio 2018
 
 <style>
     @import url('https://fonts.googleapis.com/css?family=Lobster|Muli');
@@ -12,14 +9,56 @@ title: Design Pattern
         color:#f72c44;
         font-size:500%;
         text-align: center;
+        page-break-before: always;
+        page-break-after: avoid;
     }
+    h1{
+        page-break-before: always;
+    }
+
 </style>
 
 # UML
 
 ![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/freccie.jpeg)
 
----
+* **Classificatori**: Il nome generale per una classe, interfaccia o enumerazione. Sono classificatori anche componenti, casi di utilizzo e attori.
+
+* **Associazione**: relazione tra i membri di due classificatori
+
+* **Aggregazione**:  una relazione nella quale le classi parte hanno un significato anche senza che sia presente la classe tutto.
+
+* **Composizione**: associazione tra classificatori che indica una relazione di *parte intera*. una relazione nella quale le classi parte hanno un reale significato solo se sono legate alla classe tutto.
+
+* **Dipendenza**: La definizione o l'implementazione del classificatore dipendente potrebbe cambiare se viene modificato il classificatore all'estremità della freccia.
+
+[FONTE](https://msdn.microsoft.com/library/dd409437%28VS.140%29.aspx)
+
+
+<h1 class="titoliPattern">Pattern Creazionali</h1>
+
+# Factory
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/factory.png)
+
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/factory-def.png)
+
+# Abstract Factory
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/abstractFactory.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/abstractFactory-def.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/abstractFactory2.png)
+
+# Singleton
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/singleton.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/singleton-def.png)
+
+
 
 <h1 class="titoliPattern">Pattern Strutturali</h1>
 
@@ -69,12 +108,12 @@ L'adapter avvolge una classe presistente e mi restituisce una traduzione di ques
 
 * con Proxy
 
-* L'Adapter cambia l'interfaccia di un oggetto esistente, mentre il **Decorator** amplia un dato oggetto senza modificarne l'interfaccia. Per questo motivo l'Adapter è più trasparente all'utente che non l'Adapter e per questo il Decorator permette la composizione ricorsiva e l'Adapter no. 
+* L'Adapter cambia l'interfaccia di un oggetto esistente, mentre il **Decorator** amplia un dato oggetto senza modificarne l'interfaccia. Per questo motivo il Decorator è più trasparente all'utente che non l'Adapter e per questo il Decorator permette la composizione ricorsiva e l'Adapter no. 
 
 * **Facade** definisce una nuova interfaccia, mentre l'Adapter riusa una vecchia interfaccia. L'adapter fa in modo che due interfaccie esistenti lavorino insieme piuttosto che crearne una tutta nuova. 
 
 
----
+***
 
 # Composite
 
@@ -149,10 +188,165 @@ Può però trattare un insieme di oggetti eterogeneo in maniera **atomica** (o t
 
 ...da completare...
 
+-------------
+
+# Decorator
+
+[FONTE](https://sourcemaking.com/design_patterns/decorator)
+
+## Intento
+
+Vuole aggiungere delle funzionalità ad un ogggetto anche **dinamicamente** e lo fa senza ricorrere all'utilizzo di *sottoclassi*. Un componente può essere abbellito da un altro avvolgendolo ricorsivamente.
+
+> "*Incarta un regalo, mettilo in una scatola e quindi incarta anche quella*"
+
+Voglio quindi aggiungere un comportamento o uno stato in *run-time*. Però per farlo non posso usare la ereditarietà perchè non è dinamica ma statica. 
+
+## Discussione
+
+Se lo facessimo con un gerarchia di *ereditarietà* non diamo all'utente la possibilità di scegliere lui la combinazione di abbellimenti da mettere alla classe ma sarebbe forzato ad usare solamente uno dei figli. Se volessimo permettere tutte le combinazioni avremmo il numero di classi che crescerebbe esponenzioalmente. La struttura definità dal pattern è dunque essenziale. 
+
+Risolvo dunque il problema incapsulando l'oggetto base da cui partiamo (ConcreteComponent) con un interfaccia involucro (Component). Dunque sia il Decorator che il ConcreteComponent implementano entrambi l'interfaccia. E attraverso la composizione ricorsiva posso aggiungere un numero indefinito di decorator. 
+
+Bisogna fare attenzione che il Pattern Decorator **non modifica l'interfaccia vista dal cliente** aggiungendo dei metodi all'interfaccia stessa, ma  ....
+
+> "*Le decorazioni non cambiano l'abero di natale il quale rimane un albero anche con le decorazioni*"
+
+## Struttura
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/decorator.png)
+
+ 
+
+## Come implementarlo
+
+1. Il contesto deve essere rappresentato da **un unico componente base non opzionale** che può essere arricchito da più abbellimenti. 
+
+2. Creo un interfaccia che rende tutte queste classi intercambiabili
+
+3. Creo un altra interfaccia che supporti tutte le 
+
+4.  
+
+5. 
+
+6.  
+
+7. 
+
+
+## Differenze con altri pattern
+
+## Considerazioni
+
+
+
+-------------
+
+# Facade
+
+[FONTE](https://sourcemaking.com/design_patterns/facade)
+
+## Intento
+
+Se ho un complesso sistema di interfacce e di classi e voglio creare una interfaccia che comunichi con il client e sappia gestire la sottostruttura più complessa. Così che il client veda solatanto un interfaccia semplice e non una struttura enorme. 
+
+## Discussione
+
+Con un facade posso diminuire la curva di apprendimento necessaria al client per interagire con il mio sistema, ma allo stesso punto potrei limitare l'accesso a funzionalità del mio sistema utili ad un "power user". 
+
+## Struttura
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/facade.png)
+
+Le diverse parti del sottsistema non interagiscono tra loro direttamnte ma la loro interazione è gestita dall'interfaccia del Facade
+
+## Come implementarlo
+
+1. 
+
+2. 
+
+3. 
+
+4.  
+
+5. 
+
+6.  
+
+7. 
+
+
+## Differenze con altri pattern
+
+## Considerazioni
+
+
+
+-------------
+
+# Flyweigh
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/flyweight.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/flyweight-def.png)
+
+-------------
+
+
+<h1 class="titoliPattern">Pattern Comportamentali</h1>
+
+# Chain of Reponsability
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/chainOfRes.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/chainOfRes-def.png)
+
+-------------
+
+# Command
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/command.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/command-def.png)
+
+-------------
+
+# Iterator
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/iterator.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/iterator-def.png)
+
+-------------
+
+# Observer
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/observer.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/observer-def.png)
+
+-------------
+
+# State
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/state.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/state-def.png)
+
+-------------
+
+# Strategy
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/strategy.png)
+
+![](/Users/gabriele/Università/2\ anno/2\ semestre/ingegneria\ Software/APPUNTI\ ing.\ software/res/strategy-def.png)
+
+-------------
 
 
 
 
 
-
--------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
