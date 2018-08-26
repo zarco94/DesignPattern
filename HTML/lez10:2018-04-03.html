@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Gabriele Zarcone" />
-  <title>Processi - OpenSource</title>
+  <title>Pattern</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ src: local('Muli Regular'), local('Muli-Regular'), url(data:font/ttf;base64,AAEA
 width: device-width;
 }
 body{
-font-family: Arial, Helvetica, sans-serif;
+font-family: Product sans,Arial, Helvetica, sans-serif;
 font-size: 16px;
 line-height: 25px;
 color: var(--text);
@@ -128,17 +128,18 @@ page-break-after: always;
 color: var(--link);
 }
 h1{
-font-family: 'Muli', sans-serif;
+font-family: Product sans;
 color: var(--h1);
-font-weight: 600;
+font-weight: 500;
 font-size: 3rem;
 line-height: 4rem;
 margin-bottom: 0px;
 margin-top: 40px;
 }
 h2{
-font-family: 'Muli', sans-serif;
+font-family: Product sans;
 color: var(--h2);
+font-weight: 500;
 font-size: 2rem;
 margin-bottom: 0px;
 margin-top: 40px;
@@ -195,324 +196,146 @@ max-width: 870px;
 </head>
 <body>
 <header>
-<h1 class="title">Processi - OpenSource</h1>
+<h1 class="title">Pattern</h1>
 <p class="author">Gabriele Zarcone</p>
-<p class="date">Lezione 7</p>
+<p class="date">3 aprile 2018</p>
 </header>
 <nav id="TOC">
 <ul>
-<li><a href="#pull-request-e-fork">Pull request (e fork)</a></li>
-<li><a href="#gerrit">Gerrit</a></li>
-<li><a href="#build-automation-tool">Build automation tool</a><ul>
-<li><a href="#make">Make</a></li>
-<li><a href="#ant">Ant</a></li>
-<li><a href="#gradle">Gradle</a></li>
+<li><a href="#decorator-wrapper">Decorator (wrapper)</a><ul>
+<li><a href="#specializzazione">Specializzazione</a></li>
+<li><a href="#unica-classe">Unica classe</a></li>
+<li><a href="#pattern-decorator">Pattern decorator</a><ul>
+<li><a href="#concrete-component">Concrete Component:</a></li>
+<li><a href="#decorator">Decorator:</a></li>
 </ul></li>
-<li><a href="#bug-tracking-system">Bug Tracking system</a><ul>
-<li><a href="#bts-noti">BTS noti:</a></li>
+<li><a href="#cardinalità">Cardinalità</a></li>
+<li><a href="#esempio-caffè">Esempio Caffè</a><ul>
+<li><a href="#implementazioni">Implementazioni</a></li>
 </ul></li>
-<li><a href="#unified-process-o-usdp-o-rup">Unified process (o USDP o RUP)</a><ul>
-<li><a href="#cosa-lo-distingue-dagli-altri-modelli">Cosa lo distingue dagli altri modelli</a></li>
-<li><a href="#best-practice">Best practice</a></li>
-<li><a href="#parole-chiave">Parole chiave</a><ul>
-<li><a href="#use-case-driven">Use case Driven</a></li>
+<li><a href="#osservazioni">Osservazioni</a></li>
+<li><a href="#la-saga-delle-anatre">La saga delle anatre</a></li>
+<li><a href="#design-principles">Design principles:</a></li>
 </ul></li>
-<li><a href="#framework">Framework</a></li>
-</ul></li>
-<li><a href="#qualè-il-miglior-processo">Qual’è il miglior processo?</a><ul>
-<li><a href="#cmmi-capability-maturity-model-integrated">CMMI (Capability maturity model integrated)</a></li>
-</ul></li>
+<li><a href="#strategy-pattern">Strategy Pattern</a></li>
 </ul>
 </nav>
 <hr />
-<h2 id="pull-request-e-fork">Pull request (e fork)</h2>
-<p>a differenza di git flow non lavora localmente ma lavora in remoto, sono dei siti a cui mi devo collegare.</p>
-<p>Permette di gestire le iterazioni tra gli utenti di bitbucke o github ecc…</p>
-<p>E’ legato ai fork. Quando faccio un fork il meccanismo si ricorda qual’è la repository originale e mi avvisa se la versione originale viene cambiata e mi chiede se voglio aggiornare.</p>
-<p>Inoltre questo workflow permette, più importante di dare delle pull request alla repository originale. Chi fa fork e modifica quella originale, se si accorge che ha fatto qualcosa di buono invia una pull request all’originale. Così che l’originale si chiede se fare o meno il pull dall’altra repository di quella cosa o se dire al collaboratore attraverso dei messaggi cosa c’ che non va e cosa aggiungere. Oppure chiudere la pullrequest senza fare pull. In questo modo l’originale non deve tenere sotto controllo tutti i suoi collaboratori ma solo quelli che gli mandano le richiestee.</p>
-<p>La responsabilità di risolvere tutti i conflitti nella pull request è del figlio, se rimane indietro rispetto alla versione ufficiale deve essere lui a fare l’<strong>integrazione</strong>. NOn lo deve fare il proprietario.</p>
-<p>Nelle pull request di solito ci sono dei piccoli forum su cosa c’è che non va, su cosa manca per essere accettata ecc. Ogni pull request ha una vita. E alla fine muore o inglobandola o chiudendola senza inglobarla.</p>
-<h2 id="gerrit">Gerrit</h2>
-<p>ci sono progetti che sono talmente tanto grandi che non è possibile che ci sia solamente una sola persona che accetta la pull requet e basta</p>
-<p>Per esmpio android non ci può essere solo una persona, ci sono centinaia di richieste al giorno. serve un meccanismo di strbuito di moderazione (una peer review). Ma non posso fidarmi di tutte le persone che lo fanno, quindi c’è un meccanismo di voting. Se almeno 5 delle persone che possono votare gli piace la modifica fatta allora viene accettata. Deve raggiungere una soglia di votazione per essere approvato e inserito. Ma quando il singolo guardava se accettare la pull request guardava un sacco di cose diverse nessuna sufficente da sola. MAgari una cosa compila, passa i test, ma non serve a nulla. Bisogna tenere in considerazione un sacco di cose e hanno tutte un livello di maturità e esperienza deiversa.</p>
-<p>Posso quindi avere gruppi diversi per controllare l’usabilità dell’interfaccia e altri per capire se nel futuro questa cosa farà bene all’azienda.</p>
-<p>Gerrit mi permette di definire diverse categorie di votanti e ogni votante ha una sognlia diversa in base alla sua categoria, ha un valore e un peso diverso in base agli ambiti. Ed è completamente customizabile</p>
-<p>gerrit è costituito da tanti componenti:</p>
+<p>(Lez 10-1)</p>
+<h1 id="decorator-wrapper">Decorator (wrapper)</h1>
+<p>permette di aggiungere nuove funzionalità <strong>dinamicamente</strong>. Per esempio ho il testo e voglio decorarlo cn un bordo o con delle scrollbar. L’oggetto testo è sempre lui, cqmbia come lo visualizzo. Io non sono però sicuro delle decorazioni che voglio aggiungere, devo essere in grado di aggiungerele dopo: non può essere statico ma dinamico.</p>
+<p>Un altro esempio è la pizza: ho la base(pasta) e una serie di topping che posso metterci sopra. Il numero di pizze possibili sono moltissime, con un sacco di combinazioni.</p>
+<p>Si può ottenre in più modi:</p>
+<h2 id="specializzazione">Specializzazione</h2>
+<p>Faccio una serie di specializzazioni della base della pizza. Capperi = figlio della margherita. E se devo aggiungerne altri aggiungo una classe. Ogni volta che aggiungo un’ingrediente il numero possibile di pizze che posso fare cresce esponenzialmente. Ogni volta che aggiungo un ingrediente alla mi alista degli ingredienti disponibili inoltre dovrei cambiaren anche tutti i metodi delle altre classi in modo che possano interagire con la classe curcuma. Ho un esplosione di classi.</p>
+<h2 id="unica-classe">Unica classe</h2>
+<p>Faccio l’opposto: un unica classe che ha delle variabili booleane che contengono se c’è o meno la presenza di un’ ingrediente. Così però la classe margherita diventa gigantesca percheè tutti i suoi metodi (es quello che calcola il costo) diventano giganti, perchè devono tenere conto di tutte le possibili combinazioni e avere un comportamento diverso per ognuna. E’ molto negatiovo per L’open close principle =&gt; aperto alle evoluzioni ma chiuso alla modifica puntuale di quella già esistenti, cioè se voglio aggiungere nuove funzionalità non dovrei andare a modificare quelle preesistenti. Se voglio aggiungere un ingredinete qui invece devo andare a cambiare tutti i metodi della classe. va contro l’open close principle</p>
+<h2 id="pattern-decorator">Pattern decorator</h2>
+<p>= il modo giusto per farlo</p>
+<p>distingue il concetto di <strong>decoratore</strong> e oggetto <strong>decorabile</strong>.</p>
 <ul>
-<li>2 server git
-<ul>
-<li>1 ha la parte stabile approvavata</li>
-<li>1 è dove vengono sottoposti i cambiamenti</li>
-<li>il merge tra i 2 avviene solo al passaggio di votazioni con soglie</li>
-</ul></li>
-<li>server automation</li>
+<li>decoratore = aggiunge una caratteristica al decorato, ma in più deve poter essere decorato anche a sua volta.</li>
 </ul>
-<p>ci sono:</p>
+<p>prima ragionavo con delle istanze della specifica istanza, ora invece ho tranti oggetti decoratori e decorati.</p>
+<h3 id="concrete-component">Concrete Component:</h3>
+<p>ho una serie di metodi che vengono resi comuni per tutti i componenti.</p>
+<h3 id="decorator">Decorator:</h3>
+<p>capace di decorare un concrete component, perè un decorator non aggrega un concrete componetne perchè altrimenti per ogni base di pizza dovrei avere una aggregazione specifica. Quindi ho una astrazione con un interfaccia <strong>Component</strong>. Così qualunque sia la base della pizza la cito in un unico modo. Ma non è l’unico vantaggio, perchè Componette può essere implementato non solo dai Concret4Compontent ma nache da un Decorator. In questo modo posso Decorare anche un Decorator. Ho una Recursive Connection (meta-pattern). Decorator aggrega un xomponente e può essere un componente e quindi può decorare un decorator.</p>
+<h2 id="cardinalità">Cardinalità</h2>
+<p>un decorator decora un solo componente. Un componente non è decorato da più decorator perchè non è collegato a più decorazioni, ma a solo ad una che a sua volta e collegata ad un altra e così via, in questo modo ottengo più decorazioni. Quindi non 1-N, Ma nenache 1-1 perchè un oggetto componente non è sempre decorato da qualcuno, non mi potrei fermare, invece esistono dei componenti che non vengono decorati da nulla. Quindi ho 1-0,1 (= o 0 o 1).</p>
+<h4 id="errore-su-slides">Errore su slides:</h4>
+<p>Decorator ha un aggregazione con l’interfaccia component, ma se è indicata nell’UML come aggregazione non devo metterci un attributo (o metto la freccia o metto l’attributo). Se metto l’ìattributo mi obbliga a farlo con l’attributo, con la freccia posso farlo come voglio.</p>
+<h2 id="esempio-caffè">Esempio Caffè</h2>
+<p>questo <code>foto</code>sono tre componenti che aggregano uno l’altro</p>
+<p><code>whip</code> detto visione a cipolla<br />
+parla del caffè:</p>
 <ul>
-<li>i developer che fanno fetch da un git e push dall’altro</li>
-<li>i reviewer che possono fare fetch delle cose pendenti e approvano quello che funziona.</li>
+<li>chiamo la funzione <code>calcolaCosto()</code> di un caffè scuro con panna</li>
 </ul>
-<p>Ogni cambiamento a differenza delle pull request deve essere contenuto in un singolo commit. E’ limitato perchè nonn mi fa vedere tutta la storia, ma serve per diminuire la grandezza delle cose da valutare, di modo che ogni cosa da valutare si aveloce, altrimenti diventa troppo lungo farne uno e devo lasciare in attesa degli altri altrettanto grossi che magari nel frattempo diventano obsoleti. Non si chiamano commit quindi ma <strong>change</strong>, che possono anche cambiare. Ogni change ha un id che rimane costante nelle diverse versioni. Localmente dovremo usare <code>git commit --ammend</code> per sovrascrivere il commit precedente invece che continuare a creare una sua evoluzione.</p>
-<p>Se facendo il merge e la situazione nel frattempo è cambiato allora se ci sono conflitti sarà chi propone la change a doverlo aggiustare, ma anche se non ci sono conflitti bisogna essere sicuri che non sia qualcosa di dublicati.</p>
-<p>Gerrit aggiunge dei comandi ad alto livello che amplificano git (come per git-flow)</p>
-<h1 id="build-automation-tool">Build automation tool</h1>
-<p>perchè fare build automation?</p>
-<ul>
-<li>per proteggersi se qualcuno fa versione non funzionante.
-<ul>
-<li>può capitare di avere localmente tutto funzionante ma creare dei commit che siano non funzionante. Per esempio non aggiunto un file nuovo nel commit o non aver aggiunto una dipendenza nuova. Se non metto delle cose nuove necessarie per farlo funzionare che non ci sono sulla repository generale ma solo nella mia locale.</li>
-<li>con la build automation posso creare dei test automatici che mi controllano prima di accettare un commit se funziona guardando anche solo guardando cosa c’è dentro la repository.</li>
-<li>automatizzo quinid la ricompilazione e il testing</li>
-<li>posso automatizzare anche la creazione dell’ambiente di lavoro. Di modo che mi scarica in automatico tutte le dipendenze che servono. Gradle quando lo avvi ti scarica infatti tutte le dipendenze e le librerie che ti servono</li>
-<li>voglio quindi che la creazione dell’ambiente, la ricompilazione e il testing vengano fatte tutte con un comando solo.</li>
-</ul></li>
-</ul>
-<p>Ci sono molti tool disponibili:</p>
-<ul>
-<li>make
-<ul>
-<li>abbastanza vecchio</li>
-<li>di basso livello = shell</li>
-<li>crea una serie di dipendenze che se cambiano viene fatta nuovamente la compilazione in automatico. Le dipendenze dipendono da altri file a loro volta.</li>
-<li>Dipendendo solo da comandi di shell posso fargli fare quello che voglio. Ma questo diventa molto oneroso come tempo e come attenzioni da prestare (tipo il path delle dipendenze non può cambiare). Dipendeva molto dalla macchians su cui mi trovo: se sono su windows o su mac cambiano i percorsi per esempio</li>
-</ul></li>
-<li>ant
-<ul>
-<li>prende come astrazione elementare una cosa diversa rispetto a make per evitare quei problemi</li>
-<li>è scritto in JAVA da un progetto apache. Essendo in java è comodo solo se scrivi in java, con gli altri linguaggi non è così comodo</li>
-<li>ha tutti i file di configurazione in XML</li>
-</ul></li>
-<li>Maven
-<ul>
-<li>molto complesso</li>
-<li>si concentra su quello che è il processo di generazione del software</li>
-<li>fa il paio con una serie di repository e libreria di modo che possono essere ritrovate</li>
-<li>tende a isolare ogni progetto e qundi scaricava ogni dipendenza anche se c’era già sul pc. La salvava nella cartella del progetto così che fosse più trasportabile.</li>
-</ul></li>
-<li>Gradle
-<ul>
-<li>prende le cose migliori dei precedenti</li>
-<li>ha origini in java anche lui, ma ha un sistema di plugin che lo rendono utile anche per gli altri linguaggi.</li>
-<li>ha un linguaggio dichiarativo con una nuova sintassi che mi permette di allontanarci da java anche se sotto sotto è java.</li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">// pluggin da applicare</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">apply plugin: 'java'</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">apply plugin: 'eclipse'</a>
+<p>la panna, il cacao sono tutte decorazioni del caffè</p>
+<p>quindi chiamo <code>calcolaCosto()</code> su panna che chiama <code>calcolaCosto()</code> sulla sua decorazione (cioccolato) che chiama <code>calcolaCosto()</code> su caffè. Quando arrivo a uno senza decoratore vengono calcolati tutti i costi partendo dal più interno.</p>
+<h3 id="implementazioni">Implementazioni</h3>
+<p>due metodi uno calcola il costo e l’altro la descrizione #### Metodo Statico (con attributo)</p>
+<blockquote>
+<p>costruisco le cose che mi servono attraverso i costruttori. Salvo le informazioni dell’ogeto decorato negli attributi dell’oggetto decoratore. Non devo andare a chiedere le cose al decorato, sono già salvate nel decoratore come attributo</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">abstract</span> <span class="kw">class</span> Bevereage{</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="dt">int</span> <span class="fu">cost</span>();</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">}</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">// dove deve cercare le dipendenze</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">repositories{</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="fu">jcenter</span>()</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">// quali dipendenze mi servono, specificando se mi servono in fase di test o di compilazione ecc</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">dependencies{</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    testCompile 'junit:junit:<span class="fl">4.12</span>'</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">    test</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">}</a></code></pre></div>
-<p>Non c’è codice, sa lui per convenzione dove andare a prendere le cose e come farlo, se voglio modificare come lo fa posso farlo, altrimenti lui lo fa di default. Se non voglio modificare il comportamento mi basta usare il liguaggio dichiarativo semplice.</p>
-<p>Lavora per convenzioni, se tu non specifichi i percosi lui salva tutto sempre nelle stesse cartelle. Così non devo sempre specificare le cose ogni volta</p>
-<h2 id="make">Make</h2>
-<p>sono comandi di shell che creano dipendenze tra file.</p>
-<pre><code>hellomake: hellomake.c hellofunc.c
-    gcc -o hellomake hellomake.c hellofunc.c -I</code></pre>
-<p>dico che hellomake dipende dai file hellomake.c e hellofunc.c</p>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">abstract</span> <span class="kw">class</span> AbstractCondiment <span class="kw">extends</span> Beverage{</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="kw">private</span> Beverage beverage;</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="fu">AbstractCondiment</span>(Beverage b){</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">        beverage=b;</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    }</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="dt">int</span> <span class="fu">cost</span>(){</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">        <span class="kw">return</span> beverage.<span class="fu">cost</span>() + <span class="fu">condimentCost</span>();</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">    }</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">    <span class="kw">abstract</span> <span class="dt">int</span> <span class="fu">condimentCost</span>();</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="kw">class</span> ConcreteCondiment <span class="kw">extends</span> AbstractCondiment{</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">    <span class="dt">int</span> <span class="fu">condimentCost</span>(){</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">        <span class="kw">return</span> <span class="dv">20</span>;</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">    }</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">}</a></code></pre></div>
+<p>ogni classe finale ha molto poco da dire, il resto viene astratto nella classe astratta.</p>
 <ul>
-<li>se non ho un file hellomake allora lo genera</li>
-<li>se ho un file hellomake allora lo rigenera se la sua data è più vecchia delle date dei file da cui dipende</li>
+<li><p>ho una classe asratta Beverage che ha un <code>getDescription</code> già impementato (poteva anche essere una interfaccia)</p></li>
+<li><p>Espresso estende Beverageho un prezzo base per le diverse tipologie di caffè</p></li>
+<li><p>classe astratta <code>condimentDecorator()</code> che non fa nulla</p></li>
 </ul>
-<p>Ragiona su file e sulle loro date di creazione.</p>
-<p>La prima riga mi dice i file che devo controllare, le righe successive mi dicono la lista di comandi shell che deve fare</p>
-<p>Posso creare delle regole, dei file con questi comandi da lanciare ogni volta. E usare queste regole come se fossero delle funzioni all’interno di altre regole.</p>
-<p>E’ però molto dipendente dal computer su cui gira, non è portatile. Problemi se non hanno le stesse librerie ecc.</p>
-<p>Ci sono dei comandi in cui dovevi prima dichiarare le dipendenze che ti servono e se non ci sono devi gestire che cosa deve fare il comando per gestire l’eccezione. Devo costurire dello script apposta per ogni eccezione. Non come gradle che semplicemente me lo scarica automaticamente.</p>
+<h4 id="dinamico-con-metodi">Dinamico (con metodi)</h4>
+<blockquote>
+<p>le informazioni relative al decorato vengono richieste dal decoratore attraverso dei metodi del decorato.</p>
+</blockquote>
+<p>mai usare un <code>double</code> per i soldi, non ritornano le somme altrimenti</p>
+<p>il decorator viene usato in moltre classi java.<br />
+Ognuno aggunge un comportamento diverso su come si deve comportare un certo metodo</p>
+<h2 id="osservazioni">Osservazioni</h2>
+<p>Se devo aggiungere un nuovo decoratore aggiungo una classe sola e non devo modificasre tutte le altre classi.</p>
+<p>il debugging sarà più complicato perchè continuo ad entrare in oggetti diversi, ma i vari oggetti sono più snelli ed è più difficile che ci siano errori.</p>
+<p>Questo pattern è perfetto per l’open close principle:</p>
 <ul>
-<li>automake</li>
-<li>autoconf</li>
-<li>imake</li>
+<li>chiuso alle modifiche</li>
+<li>aperto alle estensioni</li>
 </ul>
-<h2 id="ant">Ant</h2>
-<p>nace come supporto al progetto tomcat</p>
-<p>scritto in java per progetti java e supporta i tool di versioning</p>
-<p>Non fa solo compilazione ma anche test e deploy</p>
-<p>Com’è un build file:</p>
+<p>Viene usato in <code>InputStream</code>: decoro un flusso d’ingresso con delle caratteristiche. Come è fatto l’input o come sono fatti gli ingressi. Ho degli oggetti base di inputstream che però hanno delle caratteristiche da aggiungerci (lowerCase, buffered ecc…..)</p>
+<p>L’ereditarietà non sempre è la soluzione migliore per relazionare due classi. La composizione è molto potente e posso usarla al suo posto. Per composizione si intende usare classi compontenti relative ad un interfaccia</p>
+<p>Un esempio di suo utilizzo è la Duck Saga descritta dal libro</p>
+<h2 id="la-saga-delle-anatre">La saga delle anatre</h2>
+<p>quando uso l’ereditarietà o il controllo su chi eredito. Posso decidere da chi eredito, sono io che lo decido. Il padre però non ha alcun potere sul figlio, non può decidere chi lo può estendere. Chiunque può scrivere una classe che estende la mia classe. Non posso decidere che non mi può estendere. Posso mettere <code>final</code> per non essere esteso da nessuno, ma se permetto a qualcuno di estendermi lo sto permettendo a tutti. (attenzione quindi ad usare l’attributo protected)</p>
+<p>Mentre con la composizione ho il controllo, l’interfaccia controlla i metodi che deve avere chi lo implementa. Con l’interfaccia ho il controllo sul figlio.</p>
+<p>la duck saga serve per fare un simulatore delle anatre:</p>
 <ul>
-<li>XML format</li>
-<li>sintassi dichiarativa</li>
-<li>contiente un project da costruire testare e installare</li>
-<li>può contenere un altro progetto dentro ad un altro. Ho dei <em>subproject</em> ognuno con il suo build file.</li>
+<li><p>classe base = DUCK che mi dice che un anatra può nuotare, fare quack o posso ottenere info su di lei</p></li>
+<li><p>poi ci sono delle specializzazioni = specificano il colore diverso delle diverse anatre</p></li>
 </ul>
-<p>L’XML non sempre è molto leggibile e ci sono dei tool che ti aiutano a leggerlo.</p>
-<p>Ogni progetto contiene più target (es compilazione o deploying) che possono avere dipendenze tra di loro. Non posso fare uno se prima non faccio un altro per esempio.</p>
-<h2 id="gradle">Gradle</h2>
-<p>Ha un linguaggio <em>groovy</em> ovvero una forma più dichiarativa di Java. E’ sempre java, quando scrivo dei comandi dichiarativi poi questi vengono eseguiti attraverso script java.</p>
-<p>Funziona attraverso delle convenzioni ed è estendibile tramite plugin</p>
-<h1 id="bug-tracking-system">Bug Tracking system</h1>
-<p>ci serve per tenere tracci e organizzare meglio la comunicazione tra i beta tester e gli sviluppatori.</p>
-<p>Succede spesso che se ho 300 persone e ho un errore mi arrivano 300 segnalazioni dello stesso errore. Ma mi devo mettere a riparo dall’overflow di comunicazione. Creo allora un database di segnalazioni già fornite in cui se voglio fare una sgnalazione allora prima controllo se è già stata segnalata. Al massimo scrive un +1 e non la riscrivo da capo.</p>
-<p>Devo far capire a chi mi ha comunicato l’errore che ho visto la sua segnalazione e l’evoluzione fino alla chiusura del bug.</p>
-<p>Mi da anche un segnale dello stato di avanzamento del progetto e la sua reattività. Se ci sono errori del 2013 ancora non risolti allora magari non ha senso che ci perdo tempo.</p>
-<p>Non posso usare un forum genereico o una mail generico. La segnalazione dell’errorre deve essere guidata. Non mi possono dire solamente “il programma è crushato” Devono compilare un form che chiede su quale versione sei, su quale sistema lo usi ecc.</p>
-<p>Un bug per esssere utile deve essere:</p>
+<p>voglio aggiungere il metodo <code>fly</code> pechè le anatre sanno anche volare. Dovrei aggiungere un metodo alla classe Duck. è pericoloso perwò modificare la classe Duck, perchè non ho controloo su chi eredita da me, chiunque può ereditare da me (non so chi lo fa).</p>
+<p>magari un altro sviluppatore aveva fatto anche la <em>papaerella di gomma</em> che ereditava da Duck, se modifico la classe padre duck anche le paperelle di gomma iniziano a volare. Perchè ho sfruttato l’ereditarietà.</p>
+<p>Quindi è pericoloso cambiare una classe da cui altri classi ereditano.</p>
+<p>Possibili soluzioni:</p>
 <ul>
-<li>vero (ovviamente)</li>
-<li>ripetibile</li>
-<li>isolato (non una serie di errori tutti insieme)</li>
+<li><p><strong>override</strong>: tolgo il metodo fly svuotandolo nella papaerella di gomma -&gt; violo il principio di LIskov -&gt; <strong>NON VA BENE</strong></p></li>
+<li><p><strong>realizzo con interfacce</strong>:creo un’interfaccia con il metodo <code>fly</code> e solo le anatre che volano lo implementano. Così però devo implementare il metodo fly in tutte le classi che implemetnano l’interfaccia, perchè l’interfaccia non implementa nulla.</p></li>
+<li><p><strong>delega</strong>(strategy pattern): rimappo usando uno strategy pateern.</p></li>
 </ul>
-<h3 id="bts-noti">BTS noti:</h3>
+<h2 id="design-principles">Design principles:</h2>
 <ul>
-<li>Bugzilla</li>
-<li>Scarab</li>
-<li>GNATS</li>
-<li>BugManager</li>
-<li>Mantis</li>
+<li>Quando si progetta devi stare attento a quali sono gli aspetti e le parti che stanno cambiando e tenerle d’occhio in maniera conscia. Devo accorgermi di quali sono i punti di dinamicità. Se continuo a cambiare una parte di comportamneto del mio codice, allora forse è meglio estrarre quella parte con il refactoring. Bisogna separare le parti che continuano a variare.</li>
+<li>Dependency inversion: programma verso interfacce e non implementazioni (es duck saga)</li>
 </ul>
-<p>Quando arriva un bug noto può succedere:</p>
+<p>Se ho dei modi di fare quack e dei modi di volare, vuol dire che esistono dei comportamenti astratti con le loro implementazioni. Ma allora non li dovrà implementare duck, li dovrà contenere. Duck ha un attributo flyBehavior, QuackBehavior che puntano ad uno specifico oggetto che implementa quel behavior. QuackBehavior è un oggetto del tipo quackbehavior che spiega come si comporta su quella cosa. Delego qualcun altro a fare quella cosa. Ovvero quello che fa lo strategy pattern.</p>
+<h1 id="strategy-pattern">Strategy Pattern</h1>
+<p>Fa uno scheletro di un qualcosa di cui però una parte non sa come deeve esserre fatta, e allora quella parte la delega aqualcun altro. Per esempio se devo faretazione un qualcosa che ordina degli oggetti posso farlo con diversi algoritmi di ordniamenti. QQUindi io creo la struttura e poi la scelta e l’implementazione dell’algoritmo viene delegata. E soprattutto rende intercambiabili le possibilità.</p>
 <ul>
-<li>che venga aperto perchè non noto</li>
-<li>aperto ma con richiesta di info ulteriori</li>
-<li>chiuso perchè non è un baco perchè magari non hai capito il programma</li>
-<li>chiuso perchè non riproducibile</li>
-<li>chiuso perchè già segnalato</li>
+<li><p>tengo in una classe l’aspetto caldo e tutte le parti fredde in una classe separata</p></li>
+<li><p>lavora veros astrazioni e non cose concrete</p></li>
 </ul>
-<p>una volta aperto viene assegnato a qualche sviluppatore che lo risolva.</p>
-<p>Una issue però può essere aperta quante volte si vuole anche dopo la risoluzioni se c’è ancora qualche problema.</p>
-<p>Se faccio un fix su un ramo del versioning è difficile farlo mergiare nel ramo master. Succedede in progetti che hanno delle versioni sviluppate in contemporanea. Capita anche a volte che quello che vedano i tester sia il master e che i loro problemi siano stati risolti in versioni successive ancora in produzione , e quindi nell’errore si dice: vai a vedere la versione nightly (che viene rilasciata ogni notte con tutti progressi testati ma non finali)</p>
-<p>Nella realtà non c’è bisogno di gestire singolarmente tutti i singoli tool. Spesso vengono tutti insieme su siti di hosting:</p>
-<ul>
-<li>sourceforge/berlios</li>
-<li>gotdotnet (solo progetti .NET)</li>
-<li>tigris</li>
-<li>code.google.com (chiuso usano github)</li>
-<li>openhub.net</li>
-<li>github</li>
-<li>bitbucket</li>
-<li>gitlab</li>
-</ul>
-<p>e ci sono anche siti di <strong>continuos integretion</strong> che si aggiungono a questi per fare l’ultimo step</p>
-<h1 id="unified-process-o-usdp-o-rup">Unified process (o USDP o RUP)</h1>
-<p>fino ad adesso abbiamo visto modelli didattici (cascata, spirale ecc), l’XP un po’ più anartica ma che comunque ha delle linee guide non sempre semplici da seguire.</p>
-<p>Questo invece è un modello che viene venduto alle aziende</p>
-<p>Chiamato anche come:</p>
-<ul>
-<li>Unified Software Developmente Process (USDP)</li>
-<li>Rational Unified Process (RUP): dove rational è il nome dell’azienda che lo ha inventato e lo vende</li>
-</ul>
-<p>Utilizza UML. Hanno inventato l’UML e hanno deciso di dare un senso a quello che era solo un linguaggio che poteva essere usato bene o male. Hanno creato quindi un modello di processo per utilizzare nel modo corretto UML e hanno fondato Rational.</p>
-<p>Non è l’unico modello che usa l’Object orientation e non è l’unico che usa l’UML</p>
-<h2 id="cosa-lo-distingue-dagli-altri-modelli">Cosa lo distingue dagli altri modelli</h2>
-<ul>
-<li>si definisce come Sequenziale, Iterativo e Incrementale
-<ul>
-<li>va adistruggere le consapevolezze fino ad adesso. Ma è solo una frase da marketing. Così che sembra di andare in contro a qualunque cliente.</li>
-<li><strong>Sequenziale</strong> lo dice perchè lavora a livelli di granaluratità temporale differenti. Ci sono 4 fasi e poi hai la consegna</li>
-<li><strong>iterativo:</strong> all’interno di ogni fase però devo iterativamente svolgere una serie di attività. Sono iterativo quindi a livello giornaliero e non mensile</li>
-<li><strong>incrementale:</strong> finite le quattro fasi le posso ricominciare e creare un nuovo incremento</li>
-</ul></li>
-</ul>
-<p>da dei nomi nuovi alle fasi:</p>
-<ul>
-<li>inception</li>
-<li>elaboration: deettagliare il lavoro e fare progettazione</li>
-<li>construction: costruirlo e implementarlo</li>
-<li>transition: portarlo sulla macchina dell’utente</li>
-</ul>
-<p>Di modo da non avere ambiguità con gli altri processi. I nomi classici delle fasi invecce gli usa come cose che devo fare durante le frasi, ma non sono una dopo l’altra come nella cascata. NOn le inserisce nel nome delle fasi, ma le usa comunque.</p>
-<p>Per esempio in iception che è la fase iniziale in cui l’idea germoglia devo fare molta raccolta requisiti, di analisi del mercato, non faccio test. Non è solo una cosa. è la somma di ognuna di queste cose. Ci sono delle curve anche all’interno della stessa fase. C’è un diagramma da seguire con le 4 fasi e le varie attività e quanto di questa attività devo fare all’interno di ogni fase. C’è una guida poi per poter seguire il diagramma</p>
-<p>Le varie attività continuano anche nelle fasi successive, non c’è congelamento. E’ tutto mescolato ma in maniera studiata.</p>
-<h2 id="best-practice">Best practice</h2>
-<p>dice una serie di pratiche che possono essere comode per lui</p>
-<ul>
-<li>sviluppare iterativamente</li>
-<li>gestire i requisiti di modo che siano sempre alla base del mio sviluppo. Non faccio nulla che non abbia a che fare con i requisiti. C’è collegamento tra tutti i documenti</li>
-<li>Usare componenti che si hanno già</li>
-<li>creare modelli visivi del software (es UML)</li>
-<li>Verificare la qualità del software</li>
-<li>COntrollare modifiche del software</li>
-</ul>
-<h2 id="parole-chiave">Parole chiave</h2>
-<h3 id="use-case-driven">Use case Driven</h3>
-<p>è l’equivalente delle use stories nel mondo UMl anche se è molto più formale e quidata. Viene guidato con uno schema di domande rigide che ti fanno specificare ogni cosa. Usato per:</p>
-<ul>
-<li>definizione e negoziazione dei requisiti e la loro validazione:
-<ul>
-<li>praticamente ogni interazione con il cliente</li>
-</ul></li>
-<li>la definizione dei test di accettazione
-<ul>
-<li>vengono ripresi in mano anche per pianificare i test</li>
-</ul></li>
-<li>la pianificazione dei rilasci
-<ul>
-<li>se voglio decidere cosa fare nel prossimo incremento</li>
-</ul></li>
-</ul>
-<p>Sono dei documenti in evoluzione che possono cambiare e posso aggiunger più dettagli finchè voglio</p>
-<p>Sono centrati sull’architettura. Di solito vengono fatte stime di produttività per capire i vantaggi e svantaggi delle architetture. Una volta che si sceglie non si cambia più e si va avanti su quello. Ma per UP fare una scelta così importante quando ancora non si conosce bene il problema nella fase di inception è rischioso, qundi anche quello si può mettere in discussione. Soprattutto nell’ultima fase quando si conosce molto meglio il problema.</p>
-<h2 id="framework">Framework</h2>
-<p>si può vedere Up come framework di modelli che include altri modelli. SI può adattare per essere usato con le pratiche XP per esempio. Si usa nelle pratiche giornaliere con XP mentre nella fase macroscopico si utilizza la filosofia UP.</p>
-<p>Vi è una versione che sic chiama Enterprise che aggiunge anche due fasi:</p>
-<ul>
-<li>Production : tutto quello che c’è dopo l’uscita del programma(call center ecc)</li>
-<li>Rwtirement: se non voglio più continuare o se devo passare ad altri il progetto</li>
-</ul>
-<h1 id="qualè-il-miglior-processo">Qual’è il miglior processo?</h1>
-<p>Confrontare i processi non è semplice eprchè sono tutti diversi ma mi è utile per:</p>
-<ul>
-<li>confrontare le ditte
-<ul>
-<li>so qunato sono affidabili le ditte rispetto a quello che promettono al bando</li>
-</ul></li>
-<li>per confrontare me stesso nel futuro
-<ul>
-<li>non solo il singolo progetto, ma come posso avere dei miglioramenti usando i diversi processi possibili</li>
-</ul></li>
-</ul>
-<p>Un processo di qualità mi porta, mi aiuta ad avere un prodotto fatto bene. Quindi conviene trovare il processo migliore per noi.</p>
-<h2 id="cmmi-capability-maturity-model-integrated">CMMI (Capability maturity model integrated)</h2>
-<p>il SEI, un ente svizzero diing software ha creato un modello con delle metriche di valutazione e certificazione dei processi</p>
-<p>Utile per migliorare il processo o confrontare le ditte</p>
-<p>Identifica 22 aree in quanttro categorie:</p>
-<ul>
-<li>ingegneria</li>
-<li>gestione del processo</li>
-<li>gstione del progetto</li>
-<li>supporto</li>
-</ul>
-<p>e per ognuna di queste categorie identifica delle aree di intervento, delle pratiche e delle obbiettivi. Poi vado a barrare delle caselle per vedere se gli obbiettivi vengono raggiunti ecc.</p>
-<p>Identifica per ogni area un:</p>
-<ul>
-<li>SG specific goal</li>
-<li>SP specific practice</li>
-<li>GG generic goal</li>
-<li>GP generic practice</li>
-</ul>
-<p>per ogni goal ho delle practice che devo controllare se vengono attuate</p>
-<p>es:</p>
-<ul>
-<li>SG 1
-<ul>
-<li>SP 1</li>
-<li>SP 2</li>
-<li>SP3</li>
-</ul></li>
-<li>SG 2
-<ul>
-<li>SP 1</li>
-</ul></li>
-</ul>
-<p>quelli specifici sono diversi per ogni area mentre i generici sono uguali per ogni area, ma per ogni area devi capire come usarli in quell’area.</p>
-<p>Nel momento in cui ho soddisfatto tutte le practice ottengo il goal. I goal sono man mano crescenti. Ogni volta che ottengo un goal allora in quell’area sono a quel livello.</p>
-<p>Ho una scala di livelli da 0 a 5:</p>
-<ol start="0" type="1">
-<li>incompleta</li>
-<li>eseguita</li>
-<li>gestita</li>
-<li>definita</li>
-<li>gestita quantitativamente</li>
-<li>ottimizzata</li>
-</ol>
-<p>Non è però sufficente per confrontare due processi</p>
-<p>(? vedere fine lezione con video da minuto:50 per la spiegazione dei livelli)</p>
+<p>la gang of four lo presenta coe una maniera per definire una serie di algoritmi differenti tra di loro, incapsularli e renderli intercambiabili fra di loro</p>
+<p><strong>es</strong>: andare a capo di word</p>
+<p><strong>es</strong> in JSWING per esempio è il <em>Jcomponent</em>: i componenti possono essere inquadrati in diversi tipi di bordo. E’ diverso da usare il decorator. Io so già il concetto di bordo, non è più una decorazione qualunque, so cosa voglio è un bordo, non qualcosa che nel tempo potrebbe essere altro. Quindi non mi serve usare decorator. Ma ho comunque tanti tipi di bordo, quindi diverse strategie. E’ più statico di decorator.</p>
 </body>
 </html>

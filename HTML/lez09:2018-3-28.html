@@ -5,77 +5,12 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Gabriele Zarcone" />
-  <title>Processi - OpenSource</title>
+  <title>Object Orientation</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <style type="text/css">
 @font-face {
@@ -94,7 +29,7 @@ src: local('Muli Regular'), local('Muli-Regular'), url(data:font/ttf;base64,AAEA
 width: device-width;
 }
 body{
-font-family: Arial, Helvetica, sans-serif;
+font-family: Product sans,Arial, Helvetica, sans-serif;
 font-size: 16px;
 line-height: 25px;
 color: var(--text);
@@ -128,17 +63,18 @@ page-break-after: always;
 color: var(--link);
 }
 h1{
-font-family: 'Muli', sans-serif;
+font-family: Product sans;
 color: var(--h1);
-font-weight: 600;
+font-weight: 500;
 font-size: 3rem;
 line-height: 4rem;
 margin-bottom: 0px;
 margin-top: 40px;
 }
 h2{
-font-family: 'Muli', sans-serif;
+font-family: Product sans;
 color: var(--h2);
+font-weight: 500;
 font-size: 2rem;
 margin-bottom: 0px;
 margin-top: 40px;
@@ -195,324 +131,228 @@ max-width: 870px;
 </head>
 <body>
 <header>
-<h1 class="title">Processi - OpenSource</h1>
+<h1 class="title">Object Orientation</h1>
 <p class="author">Gabriele Zarcone</p>
-<p class="date">Lezione 7</p>
+<p class="date">28 marzo 2018</p>
 </header>
 <nav id="TOC">
 <ul>
-<li><a href="#pull-request-e-fork">Pull request (e fork)</a></li>
-<li><a href="#gerrit">Gerrit</a></li>
-<li><a href="#build-automation-tool">Build automation tool</a><ul>
-<li><a href="#make">Make</a></li>
-<li><a href="#ant">Ant</a></li>
-<li><a href="#gradle">Gradle</a></li>
+<li><a href="#associazioni">Associazioni</a><ul>
+<li><a href="#navigabilità-associazioni">Navigabilità associazioni</a></li>
+<li><a href="#associazioni-e-attributi">Associazioni e attributi</a><ul>
+<li><a href="#errore">Errore</a></li>
 </ul></li>
-<li><a href="#bug-tracking-system">Bug Tracking system</a><ul>
-<li><a href="#bts-noti">BTS noti:</a></li>
 </ul></li>
-<li><a href="#unified-process-o-usdp-o-rup">Unified process (o USDP o RUP)</a><ul>
-<li><a href="#cosa-lo-distingue-dagli-altri-modelli">Cosa lo distingue dagli altri modelli</a></li>
-<li><a href="#best-practice">Best practice</a></li>
-<li><a href="#parole-chiave">Parole chiave</a><ul>
-<li><a href="#use-case-driven">Use case Driven</a></li>
+<li><a href="#aggregazioni">Aggregazioni</a></li>
+<li><a href="#quali-classi">Quali classi?</a><ul>
+<li><a href="#crc-card">CRC card</a></li>
+<li><a href="#carte">Carte</a></li>
 </ul></li>
-<li><a href="#framework">Framework</a></li>
+<li><a href="#pattern">Pattern</a><ul>
+<li><a href="#anti-pattern">Anti Pattern</a></li>
+<li><a href="#idioma">Idioma</a></li>
+<li><a href="#quali-sono-i-pattern">Quali sono i pattern</a></li>
+<li><a href="#meta-pattern">Meta Pattern</a><ul>
+<li><a href="#hook-method">Hook Method</a></li>
+<li><a href="#template-method">Template Method</a></li>
 </ul></li>
-<li><a href="#qualè-il-miglior-processo">Qual’è il miglior processo?</a><ul>
-<li><a href="#cmmi-capability-maturity-model-integrated">CMMI (Capability maturity model integrated)</a></li>
 </ul></li>
+<li><a href="#pattern-gang-of-four">Pattern Gang of Four</a></li>
+<li><a href="#observer-comportamentale">Observer [COMPORTAMENTALE]</a><ul>
+<li><a href="#polling">Polling</a></li>
+<li><a href="#interrupt">Interrupt</a></li>
+<li><a href="#scenario-duso-tratto-da-headfirst">Scenario d’uso (tratto da HeadFirst)</a></li>
+<li><a href="#template">Template</a></li>
+<li><a href="#hook">Hook</a></li>
+<li><a href="#si-conoscono">Si conoscono</a></li>
+<li><a href="#perchè-un-interfaccia">Perchè un interfaccia?</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#notifyobserver">NotifyObserver</a></li>
+</ul></li>
+<li><a href="#swing">Swing</a></li>
 </ul>
 </nav>
 <hr />
-<h2 id="pull-request-e-fork">Pull request (e fork)</h2>
-<p>a differenza di git flow non lavora localmente ma lavora in remoto, sono dei siti a cui mi devo collegare.</p>
-<p>Permette di gestire le iterazioni tra gli utenti di bitbucke o github ecc…</p>
-<p>E’ legato ai fork. Quando faccio un fork il meccanismo si ricorda qual’è la repository originale e mi avvisa se la versione originale viene cambiata e mi chiede se voglio aggiornare.</p>
-<p>Inoltre questo workflow permette, più importante di dare delle pull request alla repository originale. Chi fa fork e modifica quella originale, se si accorge che ha fatto qualcosa di buono invia una pull request all’originale. Così che l’originale si chiede se fare o meno il pull dall’altra repository di quella cosa o se dire al collaboratore attraverso dei messaggi cosa c’ che non va e cosa aggiungere. Oppure chiudere la pullrequest senza fare pull. In questo modo l’originale non deve tenere sotto controllo tutti i suoi collaboratori ma solo quelli che gli mandano le richiestee.</p>
-<p>La responsabilità di risolvere tutti i conflitti nella pull request è del figlio, se rimane indietro rispetto alla versione ufficiale deve essere lui a fare l’<strong>integrazione</strong>. NOn lo deve fare il proprietario.</p>
-<p>Nelle pull request di solito ci sono dei piccoli forum su cosa c’è che non va, su cosa manca per essere accettata ecc. Ogni pull request ha una vita. E alla fine muore o inglobandola o chiudendola senza inglobarla.</p>
-<h2 id="gerrit">Gerrit</h2>
-<p>ci sono progetti che sono talmente tanto grandi che non è possibile che ci sia solamente una sola persona che accetta la pull requet e basta</p>
-<p>Per esmpio android non ci può essere solo una persona, ci sono centinaia di richieste al giorno. serve un meccanismo di strbuito di moderazione (una peer review). Ma non posso fidarmi di tutte le persone che lo fanno, quindi c’è un meccanismo di voting. Se almeno 5 delle persone che possono votare gli piace la modifica fatta allora viene accettata. Deve raggiungere una soglia di votazione per essere approvato e inserito. Ma quando il singolo guardava se accettare la pull request guardava un sacco di cose diverse nessuna sufficente da sola. MAgari una cosa compila, passa i test, ma non serve a nulla. Bisogna tenere in considerazione un sacco di cose e hanno tutte un livello di maturità e esperienza deiversa.</p>
-<p>Posso quindi avere gruppi diversi per controllare l’usabilità dell’interfaccia e altri per capire se nel futuro questa cosa farà bene all’azienda.</p>
-<p>Gerrit mi permette di definire diverse categorie di votanti e ogni votante ha una sognlia diversa in base alla sua categoria, ha un valore e un peso diverso in base agli ambiti. Ed è completamente customizabile</p>
-<p>gerrit è costituito da tanti componenti:</p>
+<h1 id="associazioni">Associazioni</h1>
+<p>LA seconda delle relazioni che vediamo; ci sono diverse relazioni (generalizzazione, associazioni…)</p>
+<p>è una relazione tra istanze di classi, non tra classi -&gt; != generalizzazione</p>
+<p>un istanza deve riconoscere e ricordare un altra istanza. Studenti sono in relazione con bellettini, non con tutto il genere dei professore. Siamo associati con un istanza e non con una clsse</p>
+<p>Implica una relazione usa. Devo tenere traccia di un altra istanza perchè devo usare le sue funzioni</p>
+<p>Quando due oggetti interagiscono vuol dire che c’è una relazione</p>
+<p>Un associazione è la più smeplice tra tutte <strong>In UML:</strong></p>
+<blockquote>
+<p>la indico come una linea semplice, con:</p>
+<blockquote>
+<p><strong>label</strong>: nome della relazione (Es: segue_corso_di)</p>
+</blockquote>
+<blockquote>
+<p><strong>ruolo</strong>: è utile quando sono associazioni tra due classi uguali. Lo useremo per dare dei nomi agli attributi</p>
+</blockquote>
+<blockquote>
+<p><strong>moltiplicità</strong>: indica quante istanze di una sono in relazione con con quante istanze dell’altra e viceversa. La molteplicità lontana alla classe si riferisce a quella classe lontana.</p>
+</blockquote>
+</blockquote>
+<h2 id="navigabilità-associazioni">Navigabilità associazioni</h2>
+<p>delle associazioni non sempre sono a doppio senso. Spesso una istanza deve conoscere l’istanza dell’altra ma può non essere necessario il viceversa.</p>
+<p>ES:_ il professore non sa le istanze singole dei suoi studenti.</p>
+<p>Qundo progetto devo decidere quali istanze devo memorizzare</p>
+<blockquote>
+<p>la linea senza nulla è una associazione bidirezionale</p>
+</blockquote>
+<blockquote>
+<p>se ho una freccia non piena (-&gt;) invece le istanze sono in associazione ma quella che punta deve conoscere e ricordare quella puntata, ma quella puntata non deve ricordare chi la punta anche se è in relazione con lei.</p>
+</blockquote>
+<h2 id="associazioni-e-attributi">Associazioni e attributi</h2>
+<p>spesso l’associazione si fa attraverso la definizione di un attributo, ma non è l’unico modo.</p>
+<p>Non mi costringe ad usare un attributo. Posso anche farlo in maniera diversa.</p>
+<p><strong>VICEVERSA</strong> non è vero che ogni volta che ho un attributo in cui ho un associazione</p>
+<p>Con gli attributi posso fare anche aggregazione e composizione che sono casi particolari di associazioni.</p>
+<p>Non è perforza necessario separare associzione da aagregazione, composizione ecc.. potrei all’inizio mettere solo associazioni e poi in secondo luogo precisare che tipo di associazione.</p>
+<h3 id="errore">Errore</h3>
+<p>non va segnato in UML sia l’attributo che l’associazione perchè sto ripetendo due volte la stessa cosa. Se metto solo l’attributo o solo l’associazione ottengo lo stesso effetto. Se metto solo la freccia della associazione posso fare quello che voglio per realizzarla, se metto solo l’attributo obbligo a creare un associazione con un attributo.</p>
+<h1 id="aggregazioni">Aggregazioni</h1>
+<p>le associazioni mi serve come una versione generica di “ho bisogno di realazionarmi con qualcuno. HO bisogno di conoscerlo perchè lo uso”</p>
+<p>Ci sono dei casi che mi serve qualcosa che è parte di me, che è parte della mia definizione.</p>
+<p>è diverso dalla associazione IS_composed_of. Perchè non esaurisce la mia definizione, ci sono cose proprie dell’oggetto e non delle sue parti.</p>
+<p>è un tipo particolare di associazione, e viene anche lei molto spesso tradotto con un attributo</p>
+<p>(vedi appunti)</p>
+<p>…..</p>
+<h1 id="quali-classi">Quali classi?</h1>
 <ul>
-<li>2 server git
-<ul>
-<li>1 ha la parte stabile approvavata</li>
-<li>1 è dove vengono sottoposti i cambiamenti</li>
-<li>il merge tra i 2 avviene solo al passaggio di votazioni con soglie</li>
-</ul></li>
-<li>server automation</li>
+<li>Entity: i veri e propri oggetti che caratterizzano il dominio applicativo.</li>
+<li>Controllo : gestiscono gli eventi</li>
+<li>Boundary: rappresentano l’interfaccia</li>
 </ul>
-<p>ci sono:</p>
+<p>Un altro modo per classificare le classi, non proprio dell’informatica:</p>
 <ul>
-<li>i developer che fanno fetch da un git e push dall’altro</li>
-<li>i reviewer che possono fare fetch delle cose pendenti e approvano quello che funziona.</li>
+<li>concetti</li>
+<li>cose reali</li>
+<li>ruoli e persone</li>
+<li>eventi</li>
+<li>organizzazioni</li>
+<li>posti</li>
 </ul>
-<p>Ogni cambiamento a differenza delle pull request deve essere contenuto in un singolo commit. E’ limitato perchè nonn mi fa vedere tutta la storia, ma serve per diminuire la grandezza delle cose da valutare, di modo che ogni cosa da valutare si aveloce, altrimenti diventa troppo lungo farne uno e devo lasciare in attesa degli altri altrettanto grossi che magari nel frattempo diventano obsoleti. Non si chiamano commit quindi ma <strong>change</strong>, che possono anche cambiare. Ogni change ha un id che rimane costante nelle diverse versioni. Localmente dovremo usare <code>git commit --ammend</code> per sovrascrivere il commit precedente invece che continuare a creare una sua evoluzione.</p>
-<p>Se facendo il merge e la situazione nel frattempo è cambiato allora se ci sono conflitti sarà chi propone la change a doverlo aggiustare, ma anche se non ci sono conflitti bisogna essere sicuri che non sia qualcosa di dublicati.</p>
-<p>Gerrit aggiunge dei comandi ad alto livello che amplificano git (come per git-flow)</p>
-<h1 id="build-automation-tool">Build automation tool</h1>
-<p>perchè fare build automation?</p>
+<p>sono cose molto diverse tra loro.</p>
+<p>Posso usarle come punto di partenza per scoprire le classi. Ma dovrei richiedere al cliente la cosa. Posso usarlo invece come controlllo. Per vedere se le cose importanti le ho già scritte come classi. Tenendo presente che non deov per forza rappresentare tutte le cose reali. Non mi serve avere l’oggetto della mamma del dipendente, oppure non voglio tutte le info di una bibliotecaria se faccio un sistema per biblioteche. Non mi serve sapere la sua data di nascita ad esempio.</p>
+<h2 id="crc-card">CRC card</h2>
+<p>http://c2.com/doc/oopsla89/paper.html</p>
+<p>http://www.softstar-inc.com/Download/Intro%20to%20CRC.pdf</p>
+<p>più che per identificare le classi è uile per ragionare sulle dipendenze, gli attributi ecc. sulle classi che ho già trovato. Quando poi faccio il gioco, posso trovare delle cose che mi servono in più sulle dipendenze fra le varie classi e capisco cosa le caratterizza. O i metodi che mi aiutano anche a capire come devono interagire le varie classi.</p>
+<h2 id="carte">Carte</h2>
+<p>ogni classe ha una carta. Con scritte:</p>
 <ul>
-<li>per proteggersi se qualcuno fa versione non funzionante.
-<ul>
-<li>può capitare di avere localmente tutto funzionante ma creare dei commit che siano non funzionante. Per esempio non aggiunto un file nuovo nel commit o non aver aggiunto una dipendenza nuova. Se non metto delle cose nuove necessarie per farlo funzionare che non ci sono sulla repository generale ma solo nella mia locale.</li>
-<li>con la build automation posso creare dei test automatici che mi controllano prima di accettare un commit se funziona guardando anche solo guardando cosa c’è dentro la repository.</li>
-<li>automatizzo quinid la ricompilazione e il testing</li>
-<li>posso automatizzare anche la creazione dell’ambiente di lavoro. Di modo che mi scarica in automatico tutte le dipendenze che servono. Gradle quando lo avvi ti scarica infatti tutte le dipendenze e le librerie che ti servono</li>
-<li>voglio quindi che la creazione dell’ambiente, la ricompilazione e il testing vengano fatte tutte con un comando solo.</li>
-</ul></li>
+<li>Responsabilities</li>
+<li>Collaboration</li>
 </ul>
-<p>Ci sono molti tool disponibili:</p>
+<p>ogni persona prende una carta e si inizia a dialogare. “Io ho bisogno di questo servizio….Io posso darlo…. ecc”</p>
+<p>Capisco quali sono le <strong>responsabilità</strong> che ha la mia classe verso le altre classi: le info che la mia classe si deve memorizzare.</p>
+<p>E capisco qualio sono le <strong>collaborazioni</strong> che devo instaurare tra le varie classi e quindi i metodi che devo implementare.</p>
+<h1 id="pattern">Pattern</h1>
+<p>può aiutare nella fase di modellazione per la decisione delle classi. So già quali classi mi servono per risolvererb il problema.</p>
+<blockquote>
+<p>Pattern = soluzioni di problemi ricorrenti ripetibili che fornisce un architettura vincente. Sono una soluzione a una famiglia di problemi tutti simili tra loro (per questoi ripetibili)</p>
+</blockquote>
+<p>sono la soluzioni di problemi molto generici che potrebbero capitare a chiunque.</p>
+<h2 id="anti-pattern">Anti Pattern</h2>
+<p>sono le cattive soluzioni ma che sembrano molto ragionevoli. Apparentemente la soluzione sembra essere la migliore ma più si va avanti diventa un’idea pessima, ne rimango invischiato. L’antipattern mi dice: attento che in questa situazione anche se sembra la soluzione più ovvia, guarda che in realtà fa schifo.</p>
+<h2 id="idioma">Idioma</h2>
+<p>i pattern sono delle soluzioni di come costruisco e modello la mia soluzione ed esula dal linguaggio di programmazione. L’idioma è l’implementazione del pattern per un determinato linguaggio. Viene specificato perchè magari un determinato linguaggio ha un costrutto perfetto per quello che altri non hanno, quindi l’idioma mi consiglia che per quel patter in quel linguaggio si può usare un particolare costrutto di quel linguaggio.</p>
+<h2 id="quali-sono-i-pattern">Quali sono i pattern</h2>
+<p>Pattern devono essere scritti in maniera chiara. Sono stati decisi che i più importanti sono i 23 della Gang of Four. Che furono i primi a sviluppare dei pattern che usavano per risolvere problemi di grafica, ma che erano tanto generali che andavano bene anche per altre cose.</p>
+<h2 id="meta-pattern">Meta Pattern</h2>
+<p>astraggo i pattern e guardo cosa sono le componenti principali dei pattern. Ragiono su quali sono i componenti principali dei pattern</p>
+<h3 id="hook-method">Hook Method</h3>
+<p>è la parte a cui mi aggangio al pattern.</p>
+<p>metodo astratto che customizza e rende proprio del mio dominio applicativo il pattern. Scrivo un templete con alcuni punti modificabili così che io possa modificarli e metterci cose del mio dominio applicativo per applicare il pattern alle mie esigenze. Hook sono delle parti di codice non ancora scritte ma che il template già richima. Per questo deve essere astratto: uso del codice che non è ancora stato scritto. Chiamo quel codice anche se nessuno lo ha mai scritto. L’unicino è il riferimento a quella cosa e lo uso come se fosse veramente implementato, quando in realtà viene implementato solamente quando applico il pattern al mio dominio applicativo.</p>
+<p>Parte calda = la parte di codice che viene modificata per poter applicare il pattern al mio dominio.</p>
+<h3 id="template-method">Template Method</h3>
+<p>il template invece è il codice che usa gli hook e non viene modificato qunaod voglio usare il pattern. E’ tutto ciò che non è hook ma che ingloba gli hook.</p>
+<p>Parte fredda = non viene mai modificato quando applico il pattern.</p>
+<h4 id="relazione-hook-template">Relazione hook template</h4>
 <ul>
-<li>make
-<ul>
-<li>abbastanza vecchio</li>
-<li>di basso livello = shell</li>
-<li>crea una serie di dipendenze che se cambiano viene fatta nuovamente la compilazione in automatico. Le dipendenze dipendono da altri file a loro volta.</li>
-<li>Dipendendo solo da comandi di shell posso fargli fare quello che voglio. Ma questo diventa molto oneroso come tempo e come attenzioni da prestare (tipo il path delle dipendenze non può cambiare). Dipendeva molto dalla macchians su cui mi trovo: se sono su windows o su mac cambiano i percorsi per esempio</li>
-</ul></li>
-<li>ant
-<ul>
-<li>prende come astrazione elementare una cosa diversa rispetto a make per evitare quei problemi</li>
-<li>è scritto in JAVA da un progetto apache. Essendo in java è comodo solo se scrivi in java, con gli altri linguaggi non è così comodo</li>
-<li>ha tutti i file di configurazione in XML</li>
-</ul></li>
-<li>Maven
-<ul>
-<li>molto complesso</li>
-<li>si concentra su quello che è il processo di generazione del software</li>
-<li>fa il paio con una serie di repository e libreria di modo che possono essere ritrovate</li>
-<li>tende a isolare ogni progetto e qundi scaricava ogni dipendenza anche se c’era già sul pc. La salvava nella cartella del progetto così che fosse più trasportabile.</li>
-</ul></li>
-<li>Gradle
-<ul>
-<li>prende le cose migliori dei precedenti</li>
-<li>ha origini in java anche lui, ma ha un sistema di plugin che lo rendono utile anche per gli altri linguaggi.</li>
-<li>ha un linguaggio dichiarativo con una nuova sintassi che mi permette di allontanarci da java anche se sotto sotto è java.</li>
-</ul></li>
+<li>Unification: nella stessa classe ho hook e template</li>
+<li>Separation: ho due classe separate, hook class e template class e nenache relazionate fra loro</li>
+<li>Connection: sono in classi separate ma sono tra loro in relazione.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">// pluggin da applicare</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">apply plugin: 'java'</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">apply plugin: 'eclipse'</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">// dove deve cercare le dipendenze</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">repositories{</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="fu">jcenter</span>()</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">// quali dipendenze mi servono, specificando se mi servono in fase di test o di compilazione ecc</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">dependencies{</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    testCompile 'junit:junit:<span class="fl">4.12</span>'</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">    test</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">}</a></code></pre></div>
-<p>Non c’è codice, sa lui per convenzione dove andare a prendere le cose e come farlo, se voglio modificare come lo fa posso farlo, altrimenti lui lo fa di default. Se non voglio modificare il comportamento mi basta usare il liguaggio dichiarativo semplice.</p>
-<p>Lavora per convenzioni, se tu non specifichi i percosi lui salva tutto sempre nelle stesse cartelle. Così non devo sempre specificare le cose ogni volta</p>
-<h2 id="make">Make</h2>
-<p>sono comandi di shell che creano dipendenze tra file.</p>
-<pre><code>hellomake: hellomake.c hellofunc.c
-    gcc -o hellomake hellomake.c hellofunc.c -I</code></pre>
-<p>dico che hellomake dipende dai file hellomake.c e hellofunc.c</p>
+<h1 id="pattern-gang-of-four">Pattern Gang of Four</h1>
+<p>sono 23 pattern separati in:</p>
 <ul>
-<li>se non ho un file hellomake allora lo genera</li>
-<li>se ho un file hellomake allora lo rigenera se la sua data è più vecchia delle date dei file da cui dipende</li>
+<li>Creazionali: per costruire oggetti</li>
+<li>Comportamentali: interazioni tra oggetti, come dialogano tra loro</li>
+<li>Strutturali: composizione di classi di oggetti, come si relazionano e si compongono i vari oggetti</li>
 </ul>
-<p>Ragiona su file e sulle loro date di creazione.</p>
-<p>La prima riga mi dice i file che devo controllare, le righe successive mi dicono la lista di comandi shell che deve fare</p>
-<p>Posso creare delle regole, dei file con questi comandi da lanciare ogni volta. E usare queste regole come se fossero delle funzioni all’interno di altre regole.</p>
-<p>E’ però molto dipendente dal computer su cui gira, non è portatile. Problemi se non hanno le stesse librerie ecc.</p>
-<p>Ci sono dei comandi in cui dovevi prima dichiarare le dipendenze che ti servono e se non ci sono devi gestire che cosa deve fare il comando per gestire l’eccezione. Devo costurire dello script apposta per ogni eccezione. Non come gradle che semplicemente me lo scarica automaticamente.</p>
+<h1 id="observer-comportamentale">Observer [COMPORTAMENTALE]</h1>
+<p>è un pattern molto usato. Fa parte anche di pattern più complessi (devo sempre considerare le relazioni con gli altri pattern).</p>
+<p>Quando ho motle classi che devono reagire al cambiamento di stato di un istanza di un altra classe. Ho un osservato e molti osservatori. Però con una minima conoscenza gli uni degli altri. Non voglio che l’aggiunta di un osservatore o la modifica di un osservatore mi debba costringere a cambiare enormemente l’osservato. Voglio inolre un legame <strong>dinamico</strong>. non definisco chi osserva chi, ma in fase di esecuzione posso modificar chi osserva chi.</p>
+<p>Ci sono diversi modi per ragigiungere qusto scopo:</p>
+<h3 id="polling">Polling</h3>
+<p>l’osservatore ogni tanto richiede all’osservato informazioni e verifica se ha cambiato o meno il suo stato. Il problema però è che ho una perdita di performance e in più tutti gli osservatori continuerebbero a chiedere all’osservato e l’osservatore impazzisce. Per esempio se tutti i programmi continuano a chiedere alla tastiera se è stato premuto un tasto, la tastiera impazzirebbe</p>
+<h3 id="interrupt">Interrupt</h3>
+<p>Faccio il contrario allora. Il soggetto comunica che è cambito qualcosa. Chiede a chi è interessato al suo stato di registrarsi. Che è registrato riceve la notifica che lo stato è cambiato solamente quando cambia lo stato.</p>
+<p>E’ comportamentale perche a fronte di un cambiamento di stato mi determina cosa fare.</p>
 <ul>
-<li>automake</li>
-<li>autoconf</li>
-<li>imake</li>
+<li>Template = <strong>subject</strong>: rifà sempre le stesse cose e avverte gli observer che è cambiato lo stato</li>
+<li>Hook = <strong>update</strong>: è cosa deve succedere quando cambia lo stato, come deve reagire al cambiamento di stato?</li>
 </ul>
-<h2 id="ant">Ant</h2>
-<p>nace come supporto al progetto tomcat</p>
-<p>scritto in java per progetti java e supporta i tool di versioning</p>
-<p>Non fa solo compilazione ma anche test e deploy</p>
-<p>Com’è un build file:</p>
+<p>Update è l’uncino al quale il subject si può aggangiare per dirgli ora fai quello che ti serve. Il subject richiama l’update ogni volta che cambia lo stato, ma quello che deve fare l’update non è definito e deve essere specificato dall’utente</p>
+<p>Update e Subject sono in due classi <strong>separate</strong> collegate con un aggregazione. Aggregazione perchè ci deve essere qualcuno che l’osserva se no non sarebbe un osservato, quando nasce un observer è sempre collegato ad un osservato, quando nasce, vive e muore sta sempre osservando. Ce ne deve essere almeno 1. Se tra subjecg e Observer ho 1-1 vuol dire che quando nasce un Observer allora osserva già qualcosa (osserva sempre qualcosa per tutta la vita). Se metto 0-1 invece posso crearlo indipendentemente da un osservato. Se scelgo uno o l’altro cambia il modo in cui faccio il costruttore(se 1-1 passo l’osservato che dovrà osservare per tutta la vita quando lo creo)</p>
+<p>NAvigabilità è da interfacci asubject a interfaccia observer (Subject conosce l’observer mentre l’obeserver non conosce il subject). Quindi se dico che sono collegati dcon cardinalità 1-1 vuol dire che nel costruttore gli passo un subject sul quale lui si registra (ma non si ricorda a quale subject). Fin dalla sua nascita lo registro a quel subject. In questo modo rispetto nel codice quello che dice il diagramma UML</p>
+<p>Ho un’aggregazione fra interfacce ma l’interfaccia non può avere attributi (con il quale di solito sono indicate le aggregazioni). Lo faccio però perchè:</p>
 <ul>
-<li>XML format</li>
-<li>sintassi dichiarativa</li>
-<li>contiente un project da costruire testare e installare</li>
-<li>può contenere un altro progetto dentro ad un altro. Ho dei <em>subproject</em> ognuno con il suo build file.</li>
+<li>posso non realizzare l’aggregazione come un attributo</li>
+<li>l’interfaccia è come un contratto con dei metodi da implementare. Così le classi che implementano l’interfaccia dovranno anche implementare questa relazione (lo faccio diventare parte del contratto.)</li>
+<li>con un interfaccia posso creare più tipologie di osservati che comunque sarebbero compatibili con gli osservatori perchè la aggregazione è sull’interfaccia. <strong>dipendo solo dalle cose astratte</strong> (dependecy inversion)</li>
 </ul>
-<p>L’XML non sempre è molto leggibile e ci sono dei tool che ti aiutano a leggerlo.</p>
-<p>Ogni progetto contiene più target (es compilazione o deploying) che possono avere dipendenze tra di loro. Non posso fare uno se prima non faccio un altro per esempio.</p>
-<h2 id="gradle">Gradle</h2>
-<p>Ha un linguaggio <em>groovy</em> ovvero una forma più dichiarativa di Java. E’ sempre java, quando scrivo dei comandi dichiarativi poi questi vengono eseguiti attraverso script java.</p>
-<p>Funziona attraverso delle convenzioni ed è estendibile tramite plugin</p>
-<h1 id="bug-tracking-system">Bug Tracking system</h1>
-<p>ci serve per tenere tracci e organizzare meglio la comunicazione tra i beta tester e gli sviluppatori.</p>
-<p>Succede spesso che se ho 300 persone e ho un errore mi arrivano 300 segnalazioni dello stesso errore. Ma mi devo mettere a riparo dall’overflow di comunicazione. Creo allora un database di segnalazioni già fornite in cui se voglio fare una sgnalazione allora prima controllo se è già stata segnalata. Al massimo scrive un +1 e non la riscrivo da capo.</p>
-<p>Devo far capire a chi mi ha comunicato l’errore che ho visto la sua segnalazione e l’evoluzione fino alla chiusura del bug.</p>
-<p>Mi da anche un segnale dello stato di avanzamento del progetto e la sua reattività. Se ci sono errori del 2013 ancora non risolti allora magari non ha senso che ci perdo tempo.</p>
-<p>Non posso usare un forum genereico o una mail generico. La segnalazione dell’errorre deve essere guidata. Non mi possono dire solamente “il programma è crushato” Devono compilare un form che chiede su quale versione sei, su quale sistema lo usi ecc.</p>
-<p>Un bug per esssere utile deve essere:</p>
+<p><code>ConcreteSubject</code> e <code>ConcreteObserver</code> sono le due classi che implementano le interfacce.</p>
+<h2 id="scenario-duso-tratto-da-headfirst">Scenario d’uso (tratto da HeadFirst)</h2>
+<p>ho una centralina metereologica con sensori di:</p>
 <ul>
-<li>vero (ovviamente)</li>
-<li>ripetibile</li>
-<li>isolato (non una serie di errori tutti insieme)</li>
+<li>temperatura</li>
+<li>umidità</li>
+<li>pressione</li>
 </ul>
-<h3 id="bts-noti">BTS noti:</h3>
+<p>la centralina esporta un interfaccia software. Ho vari terminali che usando i dati dei tre sensori e le usano in maniera diversa dandomi info diverse (ho un unico dato base e molti usi diversi):</p>
 <ul>
-<li>Bugzilla</li>
-<li>Scarab</li>
-<li>GNATS</li>
-<li>BugManager</li>
-<li>Mantis</li>
+<li>le previsioni del tempo</li>
+<li>storico</li>
+<li>….</li>
 </ul>
-<p>Quando arriva un bug noto può succedere:</p>
+<p>Oppure potrei avere dei telefonini che mi prendono le info con un app.</p>
+<p>Ho quindi un osservato e un numero indefinito di observer.</p>
+<h2 id="template">Template</h2>
 <ul>
-<li>che venga aperto perchè non noto</li>
-<li>aperto ma con richiesta di info ulteriori</li>
-<li>chiuso perchè non è un baco perchè magari non hai capito il programma</li>
-<li>chiuso perchè non riproducibile</li>
-<li>chiuso perchè già segnalato</li>
+<li><code>registerObserver()</code></li>
+<li><code>removeObserver()</code></li>
+<li><code>notifyObserver()</code></li>
 </ul>
-<p>una volta aperto viene assegnato a qualche sviluppatore che lo risolva.</p>
-<p>Una issue però può essere aperta quante volte si vuole anche dopo la risoluzioni se c’è ancora qualche problema.</p>
-<p>Se faccio un fix su un ramo del versioning è difficile farlo mergiare nel ramo master. Succedede in progetti che hanno delle versioni sviluppate in contemporanea. Capita anche a volte che quello che vedano i tester sia il master e che i loro problemi siano stati risolti in versioni successive ancora in produzione , e quindi nell’errore si dice: vai a vedere la versione nightly (che viene rilasciata ogni notte con tutti progressi testati ma non finali)</p>
-<p>Nella realtà non c’è bisogno di gestire singolarmente tutti i singoli tool. Spesso vengono tutti insieme su siti di hosting:</p>
+<p>essendo la parte fredda non hanno a che fare con la mia implementazione. Saranno sempre uguali per ogni pattern</p>
+<h2 id="hook">Hook</h2>
+<p>2 <em>modalità</em> per fare <code>update</code>:</p>
 <ul>
-<li>sourceforge/berlios</li>
-<li>gotdotnet (solo progetti .NET)</li>
-<li>tigris</li>
-<li>code.google.com (chiuso usano github)</li>
-<li>openhub.net</li>
-<li>github</li>
-<li>bitbucket</li>
-<li>gitlab</li>
+<li>modalità <strong>PUSH</strong>: l’osservatore riceve contemporaneamente notifica e aggiornamento. Ti notifico che è cambiato lo stato e te lo passo. Va bene solo se il tempo di trasmissione dello stato è gestibile enon troppo lungo (se sono 5GB anche no)</li>
+<li>modalità <strong>PULL</strong>: ti dico solo che è cambiato lo stato e poi sei tu che ti vieni a prendere solo le info dello stato che ti serve e non tutto lo stato.</li>
 </ul>
-<p>e ci sono anche siti di <strong>continuos integretion</strong> che si aggiungono a questi per fare l’ultimo step</p>
-<h1 id="unified-process-o-usdp-o-rup">Unified process (o USDP o RUP)</h1>
-<p>fino ad adesso abbiamo visto modelli didattici (cascata, spirale ecc), l’XP un po’ più anartica ma che comunque ha delle linee guide non sempre semplici da seguire.</p>
-<p>Questo invece è un modello che viene venduto alle aziende</p>
-<p>Chiamato anche come:</p>
+<p>a volte si fa ibrido: ti passo un info che serve sempre e poi tu ti puoi andare a prendere anche altro. Così evito che tutti vengano a chiedere le cose che potrei passarli.</p>
+<p>Volgio che il pattern siano generici. Quindi le classi devono essere generiche. Non devono sapere nulla di quelle concrete. Nulla di come è fatto lo stato.</p>
+<p>(Lez 10-1)</p>
+<p>In modalità Push devo passargli lo stato. Se sono in modalità Pull invece posso anche non passargli niente ma devo far conoscere all’observer chi sono io -(subject) perchè per come abbiamo fatto l’UML l’observer non conosce il subejct (navigabilità aggregazione). Come argomento dell’update quidni passo me stesso. lui non lo sa a priori ma glielo passo ad ogni update.</p>
+<h2 id="si-conoscono">Si conoscono</h2>
+<p>Altrimenti potrei fasr conoscere il subject all’observer. Ma non faccio una freccia bidirezionale. Ma la direzione tra observer e subject (altra direzione) viene fatta tra oggetti concreti. Perchè devo conoscere come viene implementato.</p>
+<h2 id="perchè-un-interfaccia">Perchè un interfaccia?</h2>
+<p>Noi usimao un iterfaccia invece di una classe astratta perchè le classi hanno delle limitazioni. Per esempio se il mio subject concreto fosse un figlio di un altra classe ancora, non potrei farlo diventare figlio anche della classe astratta, mi serve un interfaccia. è figlio di qualcosa ma implementa anche l’interfaccia (si può fare).</p>
+<h2 id="java">Java</h2>
+<p>In Java esiste già una classe astratta Observable che ha già implementato tutto. E un interfaccia Observer che contiene solo update(). All’esame posso usare uno o l’altro. Basta che faccio il grafico giusto.</p>
+<p>Java implementa entrambi i metodi (push &amp; pull). Nei metofi della classe Observasble ci sono entrambi infatti ==&gt; Quelli senza Observer nell’argomento e quelli che non ce l’hanno.</p>
+<h2 id="notifyobserver">NotifyObserver</h2>
+<p>è un metodo publico. Chiunque può notificare gli osservatori. Anche se non è cambiato lo stato. Così il controllo dell’aggiornamento può essere esterno, non solo quando cambia lo stato ma quando voglio io. Aggiungo un <code>setChanged</code> che setta una variabile booleana che mi dice se è stato modificato o meno lo stato. Posso così controllare se è stato modificato lo stato e può chiamare o meno la notify. Notify è libero ma funziona solo se la variabile booleana è vera.</p>
+<p>…..</p>
+<h1 id="swing">Swing</h1>
+<p>libreria grafica di Java che ha degli “ascoltatori” che sono tipo degli osservatori. Ho dei listener e ad un bottone posso associare uno o più ascoltatori che reagiscono all’evento del bottone.</p>
 <ul>
-<li>Unified Software Developmente Process (USDP)</li>
-<li>Rational Unified Process (RUP): dove rational è il nome dell’azienda che lo ha inventato e lo vende</li>
+<li>Observsble = JButton</li>
+<li><p>Observer = va implementato (actionPerformed)</p></li>
+<li>ActionPerformed = hook</li>
+<li><p>ActionListener = template</p></li>
 </ul>
-<p>Utilizza UML. Hanno inventato l’UML e hanno deciso di dare un senso a quello che era solo un linguaggio che poteva essere usato bene o male. Hanno creato quindi un modello di processo per utilizzare nel modo corretto UML e hanno fondato Rational.</p>
-<p>Non è l’unico modello che usa l’Object orientation e non è l’unico che usa l’UML</p>
-<h2 id="cosa-lo-distingue-dagli-altri-modelli">Cosa lo distingue dagli altri modelli</h2>
-<ul>
-<li>si definisce come Sequenziale, Iterativo e Incrementale
-<ul>
-<li>va adistruggere le consapevolezze fino ad adesso. Ma è solo una frase da marketing. Così che sembra di andare in contro a qualunque cliente.</li>
-<li><strong>Sequenziale</strong> lo dice perchè lavora a livelli di granaluratità temporale differenti. Ci sono 4 fasi e poi hai la consegna</li>
-<li><strong>iterativo:</strong> all’interno di ogni fase però devo iterativamente svolgere una serie di attività. Sono iterativo quindi a livello giornaliero e non mensile</li>
-<li><strong>incrementale:</strong> finite le quattro fasi le posso ricominciare e creare un nuovo incremento</li>
-</ul></li>
-</ul>
-<p>da dei nomi nuovi alle fasi:</p>
-<ul>
-<li>inception</li>
-<li>elaboration: deettagliare il lavoro e fare progettazione</li>
-<li>construction: costruirlo e implementarlo</li>
-<li>transition: portarlo sulla macchina dell’utente</li>
-</ul>
-<p>Di modo da non avere ambiguità con gli altri processi. I nomi classici delle fasi invecce gli usa come cose che devo fare durante le frasi, ma non sono una dopo l’altra come nella cascata. NOn le inserisce nel nome delle fasi, ma le usa comunque.</p>
-<p>Per esempio in iception che è la fase iniziale in cui l’idea germoglia devo fare molta raccolta requisiti, di analisi del mercato, non faccio test. Non è solo una cosa. è la somma di ognuna di queste cose. Ci sono delle curve anche all’interno della stessa fase. C’è un diagramma da seguire con le 4 fasi e le varie attività e quanto di questa attività devo fare all’interno di ogni fase. C’è una guida poi per poter seguire il diagramma</p>
-<p>Le varie attività continuano anche nelle fasi successive, non c’è congelamento. E’ tutto mescolato ma in maniera studiata.</p>
-<h2 id="best-practice">Best practice</h2>
-<p>dice una serie di pratiche che possono essere comode per lui</p>
-<ul>
-<li>sviluppare iterativamente</li>
-<li>gestire i requisiti di modo che siano sempre alla base del mio sviluppo. Non faccio nulla che non abbia a che fare con i requisiti. C’è collegamento tra tutti i documenti</li>
-<li>Usare componenti che si hanno già</li>
-<li>creare modelli visivi del software (es UML)</li>
-<li>Verificare la qualità del software</li>
-<li>COntrollare modifiche del software</li>
-</ul>
-<h2 id="parole-chiave">Parole chiave</h2>
-<h3 id="use-case-driven">Use case Driven</h3>
-<p>è l’equivalente delle use stories nel mondo UMl anche se è molto più formale e quidata. Viene guidato con uno schema di domande rigide che ti fanno specificare ogni cosa. Usato per:</p>
-<ul>
-<li>definizione e negoziazione dei requisiti e la loro validazione:
-<ul>
-<li>praticamente ogni interazione con il cliente</li>
-</ul></li>
-<li>la definizione dei test di accettazione
-<ul>
-<li>vengono ripresi in mano anche per pianificare i test</li>
-</ul></li>
-<li>la pianificazione dei rilasci
-<ul>
-<li>se voglio decidere cosa fare nel prossimo incremento</li>
-</ul></li>
-</ul>
-<p>Sono dei documenti in evoluzione che possono cambiare e posso aggiunger più dettagli finchè voglio</p>
-<p>Sono centrati sull’architettura. Di solito vengono fatte stime di produttività per capire i vantaggi e svantaggi delle architetture. Una volta che si sceglie non si cambia più e si va avanti su quello. Ma per UP fare una scelta così importante quando ancora non si conosce bene il problema nella fase di inception è rischioso, qundi anche quello si può mettere in discussione. Soprattutto nell’ultima fase quando si conosce molto meglio il problema.</p>
-<h2 id="framework">Framework</h2>
-<p>si può vedere Up come framework di modelli che include altri modelli. SI può adattare per essere usato con le pratiche XP per esempio. Si usa nelle pratiche giornaliere con XP mentre nella fase macroscopico si utilizza la filosofia UP.</p>
-<p>Vi è una versione che sic chiama Enterprise che aggiunge anche due fasi:</p>
-<ul>
-<li>Production : tutto quello che c’è dopo l’uscita del programma(call center ecc)</li>
-<li>Rwtirement: se non voglio più continuare o se devo passare ad altri il progetto</li>
-</ul>
-<h1 id="qualè-il-miglior-processo">Qual’è il miglior processo?</h1>
-<p>Confrontare i processi non è semplice eprchè sono tutti diversi ma mi è utile per:</p>
-<ul>
-<li>confrontare le ditte
-<ul>
-<li>so qunato sono affidabili le ditte rispetto a quello che promettono al bando</li>
-</ul></li>
-<li>per confrontare me stesso nel futuro
-<ul>
-<li>non solo il singolo progetto, ma come posso avere dei miglioramenti usando i diversi processi possibili</li>
-</ul></li>
-</ul>
-<p>Un processo di qualità mi porta, mi aiuta ad avere un prodotto fatto bene. Quindi conviene trovare il processo migliore per noi.</p>
-<h2 id="cmmi-capability-maturity-model-integrated">CMMI (Capability maturity model integrated)</h2>
-<p>il SEI, un ente svizzero diing software ha creato un modello con delle metriche di valutazione e certificazione dei processi</p>
-<p>Utile per migliorare il processo o confrontare le ditte</p>
-<p>Identifica 22 aree in quanttro categorie:</p>
-<ul>
-<li>ingegneria</li>
-<li>gestione del processo</li>
-<li>gstione del progetto</li>
-<li>supporto</li>
-</ul>
-<p>e per ognuna di queste categorie identifica delle aree di intervento, delle pratiche e delle obbiettivi. Poi vado a barrare delle caselle per vedere se gli obbiettivi vengono raggiunti ecc.</p>
-<p>Identifica per ogni area un:</p>
-<ul>
-<li>SG specific goal</li>
-<li>SP specific practice</li>
-<li>GG generic goal</li>
-<li>GP generic practice</li>
-</ul>
-<p>per ogni goal ho delle practice che devo controllare se vengono attuate</p>
-<p>es:</p>
-<ul>
-<li>SG 1
-<ul>
-<li>SP 1</li>
-<li>SP 2</li>
-<li>SP3</li>
-</ul></li>
-<li>SG 2
-<ul>
-<li>SP 1</li>
-</ul></li>
-</ul>
-<p>quelli specifici sono diversi per ogni area mentre i generici sono uguali per ogni area, ma per ogni area devi capire come usarli in quell’area.</p>
-<p>Nel momento in cui ho soddisfatto tutte le practice ottengo il goal. I goal sono man mano crescenti. Ogni volta che ottengo un goal allora in quell’area sono a quel livello.</p>
-<p>Ho una scala di livelli da 0 a 5:</p>
-<ol start="0" type="1">
-<li>incompleta</li>
-<li>eseguita</li>
-<li>gestita</li>
-<li>definita</li>
-<li>gestita quantitativamente</li>
-<li>ottimizzata</li>
-</ol>
-<p>Non è però sufficente per confrontare due processi</p>
-<p>(? vedere fine lezione con video da minuto:50 per la spiegazione dei livelli)</p>
 </body>
 </html>
